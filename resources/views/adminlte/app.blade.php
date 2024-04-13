@@ -38,8 +38,8 @@
     </div>
 
     <strong>
-        <a href="{{ config('app.company_url', '#') }}">
-            {{ config('app.company_name', 'Diseñado Por MeleanDev') }}
+        <a class="text-light" href="{{ config('app.company_url', '#') }}">
+            {{ config('app.company_name', 'Desarrollado Por MeleanDev') }}
         </a>
     </strong>
 @stop
@@ -56,6 +56,10 @@
 <style type="text/css">
 
     {{-- You can add AdminLTE customizations here --}}
+    .main-footer {
+    background-color: rgb(61, 153, 112);
+    color: lightyellow;
+    }
     /*
     .card-header {
         border-bottom: none;

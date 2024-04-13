@@ -156,8 +156,8 @@ return [
     'layout_boxed' => null,
     'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
-    'layout_fixed_footer' => null,
-    'layout_dark_mode' => null,
+    'layout_fixed_footer' => ['xs' => true, 'lg' => false],
+    'layout_dark_mode' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -318,6 +318,41 @@ return [
             'text' => 'Panel Principal',
             'route' => 'dashboard',
             'icon' => 'fas fa-home',
+        ],
+        [
+            'text' => 'Ventas',
+            'url' => '#',
+            'icon' => 'fas fa-chart-bar',
+        ],
+        [
+            'text' => 'Metodos de Pagos',
+            'url' => '#',
+            'icon' => 'fas fa-landmark',
+        ],
+        [
+            'text' => 'Clientes',
+            'url' => '#',
+            'icon' => 'fas fa-address-book',
+        ],
+        [
+            'text' => 'Proveedores',
+            'url' => '#',
+            'icon' => 'fas fa-dolly-flatbed',
+        ],
+        [
+            'text' => 'Producto',
+            'url' => '#',
+            'icon' => 'fas fa-boxes',
+        ],
+        [
+            'text' => 'Administradores',
+            'url' => '#',
+            'icon' => 'fas fa-user-shield',
+        ],
+        [
+            'text' => 'Registro de Actividades',
+            'url' => '#',
+            'icon' => 'fas fa-file-signature',
         ],
         ['header' => 'account_settings'],
         [
