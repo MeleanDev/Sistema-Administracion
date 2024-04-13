@@ -15,12 +15,12 @@
                 <div class="d-flex align-items-end row">
                     <div class="col-sm-7">
                         <div class="card-body">
-                            <h5 class="card-title text-primary">Bienvenido {{auth()->user()->name}}!! 🎉</h5>
+                            <h5 class="card-title text-warning">Bienvenido {{auth()->user()->name}}!! 😎🎉</h5>
                             <p class="mb-2">
-                            Al sistema de administracion de tu comercio. <br><br>Sistema desarrollado por MeleanDev.
+                                <br>Al sistema de administracion de tu comercio. <br><br>Sistema desarrollado por MeleanDev.
                             </p>
                     
-                            <a href="https://github.com/MeleanDev" class="btn btn-sm btn-outline-primary">Contactar con el Desarrollador</a>
+                            <a href="https://github.com/MeleanDev" class="btn btn-sm btn-outline-warning">Contactar con el Desarrollador</a>
                         </div>
                     </div>
                     <div class="col-sm-5 text-center text-sm-left">
