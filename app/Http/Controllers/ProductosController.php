@@ -9,4 +9,6 @@ class ProductosController extends Controller
     public function index(){
         return view('panelAdmin.productos');
     }
+
+    
 }

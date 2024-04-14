@@ -27,6 +27,9 @@ Route::middleware('auth')->group(function () {
 
         // Productos
         Route::get('Productos', [ProductosController::class, 'index'])->name('Productos');
+        Route::Post('Productos/Crear', [ProductosController::class, 'crear'])->name('Productos.crear');
+        Route::Post('Productos/Editar', [ProductosController::class, 'editar'])->name('Productos.editar');
+        Route::Post('Productos/Eliminar', [ProductosController::class, 'eliminar'])->name('Productos.eliminar');
 
         // Administradores
         Route::get('Administradores', [AdministradoresController::class, 'index'])->name('Administradores');
