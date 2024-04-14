@@ -21,6 +21,9 @@ Route::middleware('auth')->group(function () {
 
         // Clientes
         Route::get('Clientes', [ClientesController::class, 'index'])->name('Clientes'); 
+        Route::Post('Clientes/Crear', [ClientesController::class, 'crear'])->name('Clientes.crear');
+        Route::Post('Clientes/Editar', [ClientesController::class, 'editar'])->name('Clientes.editar');
+        Route::Post('Clientes/Eliminar', [ClientesController::class, 'eliminar'])->name('Clientes.eliminar');
 
         // Proveedores
         Route::get('Proveedores', [ProveedoresController::class, 'index'])->name('Proveedores');

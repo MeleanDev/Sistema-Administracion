@@ -87,7 +87,7 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            <button type="submit" id="btnNuevo" class="btn btn-primary"><i class="fas fa-lg fa-save"></i> Guarda</button>
+            <button type="submit" id="btn" class="btn btn-primary"><i class="fas fa-lg fa-save"></i> Guarda</button>
             </div>
         </form>
         </div>
@@ -142,7 +142,7 @@
             },        
     });
     
-    //submit para el Alta y Actualización
+    //submit para el Crear y Actualización
     $('#formulario').submit(function(e){
 
       e.preventDefault(); // Previene el recargo de la página
@@ -154,50 +154,50 @@
       precio = $.trim($('#precio').val());
 
         $.ajax({
-        url: opcion === 1 ? "{{ route('Productos.crear') }}" : "{{ route('Productos.editar') }}",
-        type: "POST",
-        datatype: "json",
-        data: {
-          _token: token,
-          id: opcion === 2 ? id : null,
-          nombre: nombre,
-          descripcion: descripcion,
-          proveedor: proveedor,
-          cantidad: cantidad,
-          precio: precio,
-        },
-        success: function(data) {
-          table.ajax.reload(null, false);
-          if (opcion === 1) {
-            Swal.fire({
-              title: "Producto Agregado",
-              text: "El registro fue agregado al sistema",
-              icon: "success"
-              }); 
-          } else {
+          url: opcion === 1 ? "{{ route('Productos.crear') }}" : "{{ route('Productos.editar') }}",
+          type: "POST",
+          datatype: "json",
+          data: {
+            _token: token,
+            id: opcion === 2 ? id : null,
+            nombre: nombre,
+            descripcion: descripcion,
+            proveedor: proveedor,
+            cantidad: cantidad,
+            precio: precio,
+          },
+          success: function(data) {
+            table.ajax.reload(null, false);
+            if (opcion === 1) {
               Swal.fire({
-              title: "Producto Editado",
-              text: "El registro fue editado en el sistema",
-              icon: "info",
-              timer: 2000,
-              showConfirmButton: false,
-              timerProgressBar: true
-              }); 
+                title: "Producto Agregado",
+                text: "El registro fue agregado al sistema",
+                icon: "success"
+                }); 
+            } else {
+                Swal.fire({
+                title: "Producto Editado",
+                text: "El registro fue editado en el sistema",
+                icon: "info",
+                timer: 2000,
+                showConfirmButton: false,
+                timerProgressBar: true
+                }); 
+            }
+          },
+          error: function(xhr, status, error) {
+            Swal.fire({
+              title: "Producto No Agregado",
+              text: "El registro no fue agregado al sistema",
+              icon: "error"
+            });
           }
-        },
-        error: function(xhr, status, error) {
-          Swal.fire({
-            title: "Producto No Agregado",
-            text: "El registro no fue agregado al sistema",
-            icon: "error"
-          });
-        }
-      });
+        });
     
       $('#modalCRUD').modal('hide'); // Cierra el modal después de la solicitud AJAX
     });
     
-     //para limpiar los campos antes de dar de Alta una Persona
+     //para limpiar los campos antes de dar de Crear una Registro
     $("#btnNuevo").click(function(){
         opcion = 1; //alta           
         $("#formulario").trigger("reset");
@@ -209,7 +209,6 @@
     
     //Editar        
     $(document).on("click", ".btnEditar", function(){	
-        	        
         opcion = 2; //editar
     
         fila = $(this).closest("tr");	        
