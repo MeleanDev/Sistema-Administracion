@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class RegistroActividad extends Model
 {
     use HasFactory;
+
+    protected $fillable =[ 
+        'usuario',
+        'accion',
+        'last_login',
+    ];
 }
