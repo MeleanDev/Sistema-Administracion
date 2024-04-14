@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('registro_actividads', function (Blueprint $table) {
             $table->id();
+            $table->string('usuario');
+            $table->string('accion');
+            $table->dateTime('last_login')->nullable();
             $table->timestamps();
         });
     }
