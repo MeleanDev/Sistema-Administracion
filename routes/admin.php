@@ -8,7 +8,6 @@ use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\RegistroActividadesController;
 use App\Http\Controllers\VentasController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
 
 Route::middleware('auth')->group(function () {
     Route::prefix('Administracion')->group(function () {
@@ -27,6 +26,9 @@ Route::middleware('auth')->group(function () {
 
         // Proveedores
         Route::get('Proveedores', [ProveedoresController::class, 'index'])->name('Proveedores');
+        Route::Post('Proveedores/Crear', [ProveedoresController::class, 'crear'])->name('Proveedores.crear');
+        Route::Post('Proveedores/Editar', [ProveedoresController::class, 'editar'])->name('Proveedores.editar');
+        Route::Post('Proveedores/Eliminar', [ProveedoresController::class, 'eliminar'])->name('Proveedores.eliminar');
 
         // Productos
         Route::get('Productos', [ProductosController::class, 'index'])->name('Productos');

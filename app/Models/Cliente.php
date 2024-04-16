@@ -14,7 +14,6 @@ class Cliente extends Model
      * @var array<string>
      */
     protected $fillable = [
-        'id',
         'nombre',
         'apellido',
         'cedula',

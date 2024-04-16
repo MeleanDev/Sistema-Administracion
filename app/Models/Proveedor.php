@@ -10,7 +10,6 @@ class Proveedor extends Model
     use HasFactory;
      
     protected $fillable = [
-        'id',
         'identificacion',
         'nombre',
         'telefono',
