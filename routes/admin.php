@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
 
         // registroActividades
         Route::get('RegistroActividades', [RegistroActividadesController::class, 'index'])->name('RegistroActividades');
+        Route::Post('RegistroActividades/eliminar', [RegistroActividadesController::class, 'eliminar'])->name('RegistroActividades.eliminar');
 
     });
 });

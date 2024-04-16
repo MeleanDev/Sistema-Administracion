@@ -25,7 +25,6 @@
       <table class="table table-striped table-hover" cellspacing="0" id="datatable" style="width: 100%">
               <thead class="bg-info">
                 <tr>
-                  <th>id</th>
                   <th>Nombre</th>
                   <th>Apellido</th>  
                   <th>Cedula</th>  
@@ -37,7 +36,6 @@
               </tbody>
               <tfoot class="bg-info">
                   <tr>
-                    <th>id</th>
                     <th>Nombre</th>
                     <th>Apellido</th>  
                     <th>Cedula</th>  
@@ -108,14 +106,13 @@
       serverSide: true,
       lengthMenu: [[10, 25, 50, 100],[10, 25, 50, 100]],
       columns: [
-              {data: null, render: function(data, type, row, meta) { return meta.row + 1; }, className: 'text-center'}, // New column for row numbers
               {data: 'nombre', name: 'nombre', className: 'text-center'},
               {data: 'apellido', name: 'apellido', className: 'text-center'},         
               {data: 'cedula', name: 'cedula', className: 'text-center'},  
               {data: 'telefono', name: 'telefono', className: 'text-center'},         
               {"defaultContent": "<div class=\"dropdown text-center\"><button class=\"btn btn-primary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"> Acción </button><div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\"><button class='dropdown-item bg-warning text-light btnEditar'><i class='fas fa-edit'> Editar</i></button><button class='dropdown-item bg-danger text-light btnBorrar'><i class='fas fa-lg fa-trash'> Eliminar</i></button></div></div>"}
       ],
-          columnDefs: [{orderable: false, targets: [5,0]}],
+          columnDefs: [{orderable: false, targets: 4}],
           language: {
                   "zeroRecords": "No se encontraron resultados",
                   "emptyTable": "Ningún dato disponible en esta tabla",
@@ -202,12 +199,12 @@
       opcion = 2; //editar
   
       fila = $(this).closest("tr");	        
-      id = fila.find('td:eq(3)').text(); //capturo el ID	
+      id = fila.find('td:eq(2)').text(); //capturo el ID	
                       
-      nombre = fila.find('td:eq(1)').text();
-      apellido = fila.find('td:eq(2)').text();
-      cedula = fila.find('td:eq(3)').text();
-      telefono = fila.find('td:eq(4)').text();
+      nombre = fila.find('td:eq(0)').text();
+      apellido = fila.find('td:eq(1)').text();
+      cedula = fila.find('td:eq(2)').text();
+      telefono = fila.find('td:eq(3)').text();
 
       $("#nombre").val(nombre);
       $("#apellido").val(apellido);
@@ -222,7 +219,7 @@
   //Borrar
   $(document).on("click", ".btnBorrar", function(){
     fila = $(this);
-    id = $(this).closest('tr').find('td:eq(3)').text();
+    id = $(this).closest('tr').find('td:eq(2)').text();
     Swal.fire({
       title: '¿ Estas seguro que desea eliminar el registro #'+(id.toString())+' ?',
       text: "¡ No podrás revertir esto !",
