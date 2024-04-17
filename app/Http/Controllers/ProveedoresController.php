@@ -2,78 +2,63 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proveedor;
+use App\ProveedoresClass;
+use App\RegistroActividadesClass;
 use Illuminate\Http\Request;
 
 class ProveedoresController extends Controller
 {
+    private $proveedores;
+    private $registro;
+    const OBJETO = "Proveedor"; // Define la variable constante OBJETO
+
+    public function __construct(ProveedoresClass $proveedores, RegistroActividadesClass $registro)
+    {
+        $this->proveedores = $proveedores;
+        $this->registro = $registro;
+    }
+
     public function index(Request $request){
         if ($request->ajax()) {
-             $datos = Proveedor::all();
+             $datos = $this->proveedores->DatosProveedores();
              return datatables()->of($datos)->toJson();
          }     
          return view('panelAdmin.Proveedores');
      }
 
-     public function crear(Request $request){
+     public function crear(Request $data){
+        try {
+          $this->proveedores->CrearProveedor($data);
+          $this->registro->ActividadRegistro($data['identificacion'], "Creo un", self::OBJETO);
 
-        $data = $request->all();
-
-        $identificacion = $data['identificacion'];
-        $nombre = $data['nombre'];
-        $telefono = $data['telefono'];
-        $correo = $data['correo'];
-        $direccion = $data['direccion'];
-        $descripcion = $data['descripcion'];
-
-        Proveedor::create([
-            'identificacion'=> $identificacion,
-            'nombre'=> $nombre,
-            'telefono'=> $telefono,
-            'correo'=> $correo,
-            'direccion'=> $direccion,
-            'descripcion'=> $descripcion,
-        ]);
-
-        $respuesta = response()->json(['success' => true]);
+          $respuesta = response()->json(['success' => true]);
+        } catch (\Throwable $th) {
+          $respuesta = response()->json(['error' => true]);
+        }
         return $respuesta;
      }
 
-     public function editar(Request $request){
+     public function editar(Request $data){
+        try {
+          $this->proveedores->EditarProveedor($data);
+          $this->registro->ActividadRegistro($data['identificacion'], "Edito el", self::OBJETO);
 
-        $data = $request->all();
-
-        $id = $data['id'];
-      
-        $identificacion = $data['identificacion'];
-        $nombre = $data['nombre'];
-        $telefono = $data['telefono'];
-        $correo = $data['correo'];
-        $direccion = $data['direccion'];
-        $descripcion = $data['descripcion'];
-      
-        $Proveedo = Proveedor::where('identificacion', $id)->first();
-        $Proveedo->identificacion = $identificacion;
-        $Proveedo->nombre = $nombre;
-        $Proveedo->telefono = $telefono;
-        $Proveedo->correo = $correo;
-        $Proveedo->direccion = $direccion;
-        $Proveedo->descripcion = $descripcion;
-        $Proveedo->save();
-      
-        $respuesta = response()->json(['success' => true]);
+          $respuesta = response()->json(['success' => true]);
+        } catch (\Throwable $th) {
+          $respuesta = response()->json(['error' => true]);
+        }
         return $respuesta;
       }
 
-      public function eliminar(Request $request){
-        $data = $request->all();
-        
-        $id = $data['id'];
+      public function eliminar(Request $data){
+        try {
+          $this->proveedores->EliminarProveedor($data);
+          $this->registro->ActividadRegistro($data['id'], "Elimino un", self::OBJETO);
 
-        $producto = Proveedor::where('identificacion', $id)->first();
-        $producto->delete();
-
-        $respuesta = response()->json(['success' => true]);
+          $respuesta = response()->json(['success' => true]);
+        } catch (\Throwable $th) {
+          $respuesta = response()->json(['error' => true]);
+        }
         return $respuesta;
       }
 }
