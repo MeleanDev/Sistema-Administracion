@@ -2,69 +2,61 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cliente;
+use App\ClientesClass;
+use App\RegistroActividadesClass;
 use Illuminate\Http\Request;
 
 class ClientesController extends Controller
 {
+    private $Clientes;
+    private $registro;
+    const OBJETO = "Cliente"; // Define la variable constante OBJETO
+
+    public function __construct(ClientesClass $Clientes, RegistroActividadesClass $registro)
+    {
+        $this->Clientes = $Clientes;
+        $this->registro = $registro;
+    }
+
     public function index(Request $request){
         if ($request->ajax()) {
-             $datos = Cliente::all();
+             $datos = $this->Clientes->DatosClientes();
              return datatables()->of($datos)->toJson();
          }     
          return view('panelAdmin.Clientes');
      }
 
-     public function crear(Request $request){
-
-        $data = $request->all();
-
-        $nombre = $data['nombre'];
-        $apellido = $data['apellido'];
-        $cedula = $data['cedula'];
-        $telefono = $data['telefono'];
-
-        Cliente::create([
-            'nombre'=> $nombre,
-            'apellido'=> $apellido,
-            'cedula'=> $cedula,
-            'telefono'=> $telefono,
-        ]);
-
+     public function crear(Request $data){
+      try {
+          $this->Clientes->CrearCliente($data);
+          $this->registro->ActividadRegistro($data['cedula'], "Creo un", self::OBJETO);
         $respuesta = response()->json(['success' => true]);
+      } catch (\Throwable $th) {
+        $respuesta = response()->json(['error' => true]);
+      }
         return $respuesta;
      }
 
-     public function editar(Request $request){
-
-        $data = $request->all();
+     public function editar(Request $data){
       
-        $id = $data['id'];
-        $nombre = $data['nombre'];
-        $apellido = $data['apellido'];
-        $cedula = $data['cedula'];
-        $telefono = $data['telefono'];
-      
-        $Client = Cliente::where('cedula', $id)->first();
-        $Client->nombre = $nombre;
-        $Client->apellido = $apellido;
-        $Client->cedula = $cedula;
-        $Client->telefono = $telefono;
-        $Client->save();
-      
-        $respuesta = response()->json(['success' => true]);
+        try {
+          $this->Clientes->EditarCliente($data);
+          $this->registro->ActividadRegistro($data['cedula'], "Edito un", self::OBJETO);
+          $respuesta = response()->json(['success' => true]);
+        } catch (\Throwable $th) {
+          $respuesta = response()->json(['error' => true]);
+        }
         return $respuesta;
       }
 
-      public function eliminar(Request $request){
-        $data = $request->all();
-        
-        $id = $data['id'];
-
-        $producto = Cliente::where('cedula', $id)->first();
-        $producto->delete();
-
-        $respuesta = response()->json(['success' => true]);
+      public function eliminar(Request $data){
+        try {
+          $this->Clientes->EliminarCliente($data);
+          $this->registro->ActividadRegistro($data['id'], "Elimino un", self::OBJETO);
+          $respuesta = response()->json(['success' => true]);
+        } catch (\Throwable $th) {
+          $respuesta = response()->json(['error' => true]);
+        }
         return $respuesta;
       }
 }
