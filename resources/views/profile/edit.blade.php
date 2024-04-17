@@ -3,9 +3,9 @@
 @section('title', 'Editar Perfil')
 
 @section('content_header')
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
-        {{ __('Perfil') }}
-    </h2>
+    <h1 class="text-center">
+        Perfil
+    </h1>
 @stop
 
 @section('content')

@@ -38,6 +38,9 @@ Route::middleware('auth')->group(function () {
 
         // Administradores
         Route::get('Administradores', [AdministradoresController::class, 'index'])->name('Administradores');
+        Route::put('/Administradores/editar/{id}', [AdministradoresController::class, 'editar'])->name('Administradores.editar');
+        Route::post('/Administradores/guardar', [AdministradoresController::class, 'crear'])->name('Administradores.guardar');
+        Route::get('/Administradores/eliminar/{id}', [AdministradoresController::class, 'eliminar'])->name('Administradores.eliminar');
 
         // registroActividades
         Route::get('RegistroActividades', [RegistroActividadesController::class, 'index'])->name('RegistroActividades');
