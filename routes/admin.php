@@ -17,6 +17,9 @@ Route::middleware('auth')->group(function () {
 
         // MetodosPagos
         Route::get('MetodosPagos', [MetodosPagosController::class, 'index'])->name('MetodosPagos');
+        Route::put('MetodosPagos/editar/{id}', [MetodosPagosController::class, 'editar'])->name('MetodosPagos.editar');
+        Route::post('MetodosPagos/guardar', [MetodosPagosController::class, 'crear'])->name('MetodosPagos.guardar');
+        Route::get('MetodosPagos/eliminar/{id}', [MetodosPagosController::class, 'eliminar'])->name('MetodosPagos.eliminar');
 
         // Clientes
         Route::get('Clientes', [ClientesController::class, 'index'])->name('Clientes'); 
@@ -38,9 +41,9 @@ Route::middleware('auth')->group(function () {
 
         // Administradores
         Route::get('Administradores', [AdministradoresController::class, 'index'])->name('Administradores');
-        Route::put('/Administradores/editar/{id}', [AdministradoresController::class, 'editar'])->name('Administradores.editar');
-        Route::post('/Administradores/guardar', [AdministradoresController::class, 'crear'])->name('Administradores.guardar');
-        Route::get('/Administradores/eliminar/{id}', [AdministradoresController::class, 'eliminar'])->name('Administradores.eliminar');
+        Route::put('Administradores/editar/{id}', [AdministradoresController::class, 'editar'])->name('Administradores.editar');
+        Route::post('Administradores/guardar', [AdministradoresController::class, 'crear'])->name('Administradores.guardar');
+        Route::get('Administradores/eliminar/{id}', [AdministradoresController::class, 'eliminar'])->name('Administradores.eliminar');
 
         // registroActividades
         Route::get('RegistroActividades', [RegistroActividadesController::class, 'index'])->name('RegistroActividades');
