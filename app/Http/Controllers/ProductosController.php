@@ -2,73 +2,59 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto;
+use App\ProductosCLass;
+use App\RegistroActividadesClass;
 use Illuminate\Http\Request;
 
 class ProductosController extends Controller
 {
+    private $Productos;
+    private $registro;
+    const OBJETO = "Producto"; // Define la variable constante OBJETO
+
+    public function __construct(ProductosCLass $Productos, RegistroActividadesClass $registro)
+    {
+        $this->Productos = $Productos;
+        $this->registro = $registro;
+    }
     public function index(Request $request){
         if ($request->ajax()) {
-             $datos = Producto::all();
-             return datatables()->of($datos)->toJson();
+             $data = $this->Productos->DatosProducto();
+             return datatables()->of($data)->toJson();
          }     
          return view('panelAdmin.productos');
      }
 
-     public function crear(Request $request){
-
-        $data = $request->all();
-
-        $nombre = $data['nombre'];
-        $descripcion = $data['descripcion'];
-        $proveedor = $data['proveedor'];
-        $cantidad = $data['cantidad'];
-        $precio = $data['precio'];
-
-        Producto::create([
-            'nombre'=> $nombre,
-            'descripcion'=> $descripcion,
-            'proveedor'=> $proveedor,
-            'cantidad'=> $cantidad,
-            'precio'=> $precio,
-        ]);
-
-        $respuesta = response()->json(['success' => true]);
+     public function crear(Request $data){
+        try {
+          $this->Productos->CrearProducto($data);
+          $this->registro->ActividadRegistro($data['nombre'], "Creo un", self::OBJETO);
+          $respuesta = response()->json(['success' => true]);
+        } catch (\Throwable $th) {
+          $respuesta = response()->json(['error' => true]); 
+        }
         return $respuesta;
      }
 
-     public function editar(Request $request){
-
-        $data = $request->all();
-      
-        $id = $data['id'];
-        $nombre = $data['nombre'];
-        $descripcion = $data['descripcion'];
-        $proveedor = $data['proveedor'];
-        $cantidad = $data['cantidad'];
-        $precio = $data['precio'];
-      
-        $proveed = Producto::where('nombre', $id)->first();
-        $proveed->nombre = $nombre;
-        $proveed->descripcion = $descripcion;
-        $proveed->proveedor = $proveedor;
-        $proveed->cantidad = $cantidad;
-        $proveed->precio = $precio;
-        $proveed->save();
-      
+     public function editar(Request $data){
+      try {
+        $this->Productos->EditarProducto($data);
+        $this->registro->ActividadRegistro($data['nombre'], "Edito el", self::OBJETO);
         $respuesta = response()->json(['success' => true]);
+      } catch (\Throwable $th) {
+        $respuesta = response()->json(['error' => true]); 
+      }
         return $respuesta;
       }
 
-      public function eliminar(Request $request){
-        $data = $request->all();
-        
-        $id = $data['id'];
-
-        $producto = Producto::where('nombre', $id)->first();
-        $producto->delete();
-
-        $respuesta = response()->json(['success' => true]);
+      public function eliminar(Request $data){
+        try {
+          $this->Productos->EliminarProducto($data);
+          $this->registro->ActividadRegistro($data['id'], "Elimino un", self::OBJETO);
+          $respuesta = response()->json(['success' => true]); 
+        } catch (\Throwable $th) {
+          $respuesta = response()->json(['error' => true]); 
+        }
         return $respuesta;
       }
 }
