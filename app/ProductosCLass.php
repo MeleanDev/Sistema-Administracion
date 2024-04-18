@@ -13,7 +13,6 @@ class ProductosCLass
     }
 
     public function CrearProducto($data){
-
         Producto::create([
             'nombre'=> $data['nombre'],
             'descripcion'=> $data['descripcion'],
@@ -21,7 +20,6 @@ class ProductosCLass
             'cantidad'=> $data['cantidad'],
             'precio'=> $data['precio'],
         ]);
-        
     }
 
     public function EditarProducto($data){
