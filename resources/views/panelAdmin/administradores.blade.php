@@ -28,7 +28,7 @@
       <div class="modal fade" id="guardar" tabindex="-1" role="dialog" aria-labelledby="guardar" aria-hidden="true">
           <div class="modal-dialog" role="document">
           <div class="modal-content">
-              <div class="modal-header">
+              <div class="modal-header bg-info">
               <h5 class="modal-title" id="exampleModalLabel">Agregar Nuevo Usuario Admin</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -39,16 +39,16 @@
                       @csrf
                       <div class="form-row">
                           <div class="form-group col-md-6">
-                              <label for="Usuario">Nombre Usuario</label>
+                              <label for="name">Nombre Usuario</label>
                               <input type="text" class="form-control" placeholder="Usuario" name="name">
                           </div>
                           <div class="form-group col-md-6">
-                            <label for="Email">Correo Electronico</label>
+                            <label for="email">Correo Electronico</label>
                             <input type="email" class="form-control" placeholder="Correo" name="email">
                           </div>
                       </div>
                       <div class="form-group">
-                            <label for="inputCity">Contraseña</label>
+                            <label for="password">Contraseña</label>
                             <input type="password" class="form-control" placeholder="Contraseña" name="password">
                             <small id="passwordHelpInline" class="text-muted">
                               Debe tener entre 8 y 20 caracteres.
@@ -89,7 +89,7 @@
                           <div class="modal fade" id="exampleModal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog" role="document">
                               <div class="modal-content">
-                                  <div class="modal-header">
+                                  <div class="modal-header bg-warning">
                                   <h5 class="modal-title" id="exampleModalLabel">Editar Usuario Admin</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
@@ -101,16 +101,16 @@
                                           @csrf
                                           <div class="form-row">
                                               <div class="form-group col-md-6">
-                                                  <label for="Usuario">Nombre Usuario</label>
+                                                  <label for="name">Nombre Usuario</label>
                                                   <input type="text" class="form-control" value="{{$item->name}}" placeholder="Usuario" name="name">
                                               </div>
                                               <div class="form-group col-md-6">
-                                                <label for="Email">Correo Electronico</label>
+                                                <label for="email">Correo Electronico</label>
                                                 <input type="email" class="form-control" value="{{$item->email}}" placeholder="Correo" name="email">
                                               </div>
                                           </div>
                                           <div class="form-group">
-                                                <label for="inputCity">Contraseña</label>
+                                                <label for="password">Contraseña</label>
                                                 <input type="password" class="form-control" placeholder="Contraseña" name="password">
                                                 <small id="passwordHelpInline" class="text-muted">
                                                   Debe tener entre 8 y 20 caracteres.
