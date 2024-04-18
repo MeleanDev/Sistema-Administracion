@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdministradoresController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MetodosPagosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ProveedoresController;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     Route::prefix('Administracion')->group(function () {
 
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         // Ventas
         Route::get('Ventas', [VentasController::class, 'index'])->name('Ventas');
 
