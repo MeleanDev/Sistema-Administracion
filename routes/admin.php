@@ -11,7 +11,7 @@ use App\Http\Controllers\VentasController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
-    Route::prefix('Administracion')->group(function () {
+    Route::prefix('Sistema')->group(function () {
 
         Route::get('/PanelPrincipal', [DashboardController::class, 'index'])->name('dashboard');
         // Ventas
