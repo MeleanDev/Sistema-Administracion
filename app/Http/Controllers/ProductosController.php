@@ -22,7 +22,8 @@ class ProductosController extends Controller
              $data = $this->Productos->DatosProducto();
              return datatables()->of($data)->toJson();
          }     
-         return view('panelAdmin.productos');
+         $proveedores = $this->Productos->DatosProveedor();
+         return view('panelAdmin.productos', compact('proveedores'));
      }
 
      public function crear(Request $data){

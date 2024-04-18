@@ -41,17 +41,19 @@
                           <div class="form-group col-md-6">
                               <label for="name">Nombre Usuario</label>
                               <input type="text" class="form-control" placeholder="Usuario" name="name">
+                              <small id="name" class="form-text text-muted"> Nombre de Usuario.</small> 
                           </div>
                           <div class="form-group col-md-6">
                             <label for="email">Correo Electronico</label>
                             <input type="email" class="form-control" placeholder="Correo" name="email">
+                            <small id="email" class="form-text text-muted">Correo Electronico.</small> 
                           </div>
                       </div>
                       <div class="form-group">
                             <label for="password">Contraseña</label>
                             <input type="password" class="form-control" placeholder="Contraseña" name="password">
                             <small id="passwordHelpInline" class="text-muted">
-                              Debe tener entre 8 y 20 caracteres.
+                             La Contraseña debe tener entre 8 y 20 caracteres.
                             </small>    
                       </div>
               </div>
@@ -103,18 +105,20 @@
                                               <div class="form-group col-md-6">
                                                   <label for="name">Nombre Usuario</label>
                                                   <input type="text" class="form-control" value="{{$item->name}}" placeholder="Usuario" name="name">
-                                              </div>
+                                                  <small id="name" class="form-text text-muted"> Nombre de Usuario.</small>
+                                                </div>
                                               <div class="form-group col-md-6">
                                                 <label for="email">Correo Electronico</label>
                                                 <input type="email" class="form-control" value="{{$item->email}}" placeholder="Correo" name="email">
+                                                <small id="email" class="form-text text-muted">Correo Electronico.</small> 
                                               </div>
                                           </div>
                                           <div class="form-group">
                                                 <label for="password">Contraseña</label>
                                                 <input type="password" class="form-control" placeholder="Contraseña" name="password">
                                                 <small id="passwordHelpInline" class="text-muted">
-                                                  Debe tener entre 8 y 20 caracteres.
-                                                </small>    
+                                                    La Contraseña debe tener entre 8 y 20 caracteres.
+                                                </small>   
                                           </div>
                                   </div>
                                   <div class="modal-footer">

@@ -3,12 +3,17 @@
 namespace App;
 
 use App\Models\Producto;
+use App\Models\Proveedor;
 
 class ProductosCLass
 {
     public function DatosProducto(){
-
         $data = Producto::all();
+        return $data;
+    }
+
+    public function DatosProveedor(){
+        $data = Proveedor::all();
         return $data;
     }
 

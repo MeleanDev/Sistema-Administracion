@@ -65,23 +65,34 @@
                 <div class="form-group"> 
                     <label for="nombre">Nombre</label> 
                     <input type="text" class="form-control" id="nombre" placeholder="Nombre"> 
+                    <small id="nombre" class="form-text text-muted">Nombre del Producto.</small> 
                 </div> 
                 <div class="form-group"> 
                     <label for="descripcion">descripcion</label> 
-                    <input type="text" class="form-control" id="descripcion" placeholder="descripcion"> 
+                    <input type="text" class="form-control" id="descripcion" placeholder="Descripcion">
+                    <small id="descripcion" class="form-text text-muted">Descripcion corta del Producto.</small>  
                 </div> 
-                <div class="form-group"> 
-                    <label for="proveedor">proveedor</label> 
-                    <input type="text" class="form-control" id="proveedor" placeholder="proveedor"> 
+                <div class="form-row">
+                  <label for="proveedor">Proveedor del Producto</label>
+                  <select class="form-control mb-2" id="proveedor" name="proveedor">
+                      <option value="Sin Categoria" selected>Sin Proveedor</option>
+                      @foreach ($proveedores as $item)
+                          <option value="{{$item->nombre}}">{{$item->nombre}}</option>
+                      @endforeach
+                  </select>
+              </div>
+              <div class="form-row justify-content-around">
+                <div class="form-group col-md-5"> 
+                    <label for="cantidad">cantidad disponible</label> 
+                    <input type="number" class="form-control" id="cantidad" placeholder="cantidad" min="0">
+                    <small id="cantidad" class="form-text text-muted">Cantidad disponible.</small> 
                 </div> 
-                <div class="form-group"> 
-                    <label for="cantidad">cantidad</label> 
-                    <input type="number" class="form-control" id="cantidad" placeholder="cantidad"> 
+                <div class="form-group col-md-5"> 
+                    <label for="precio">precio del Producto</label> 
+                    <input type="number" class="form-control" id="precio" placeholder="precio" min="0"> 
+                    <small id="precio" class="form-text text-muted">Precio del Producto.</small> 
                 </div> 
-                <div class="form-group"> 
-                    <label for="precio">precio</label> 
-                    <input type="number" class="form-control" id="precio" placeholder="precio"> 
-                </div> 
+              </div>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>

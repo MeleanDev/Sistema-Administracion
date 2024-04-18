@@ -53,7 +53,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document" style="min-width: 600px">
   <div class="modal-content">
       <div class="modal-header">
       <h5 class="modal-title"></h5>
@@ -64,29 +64,39 @@
       <div class="modal-body">
           <form id="formulario" enctype="application/x-www-form-urlencoded">
               @csrf
-          <div class="form-group"> 
-              <label for="identificacion">Identificacion</label> 
-              <input type="text" class="form-control" id="identificacion" placeholder="identificacion"> 
+          <div class="row mb-2">
+            <div class="col"> 
+                <label for="identificacion">Identificacion</label> 
+                <input type="text" class="form-control" id="identificacion" placeholder="identificacion"> 
+                <small id="identificacion" class="form-text text-muted">Cedula del Proveedor.</small>
+            </div> 
+            <div class="col"> 
+                <label for="nombre">Nombre</label> 
+                <input type="text" class="form-control" id="nombre" placeholder="Nombre"> 
+                <small id="nombre" class="form-text text-muted">Nombre del Proveedor.</small>
+            </div>
+          </div>
+          <div class="row mb-2"> 
+            <div class="col"> 
+                <label for="telefono">Telefono</label> 
+                <input type="text" class="form-control" id="telefono" placeholder="Telefono"> 
+                <small id="telefono" class="form-text text-muted">Telefono del Proveedor.</small>
+            </div> 
+            <div class="col"> 
+              <label for="correo">Correo</label> 
+              <input type="text" class="form-control" id="correo" placeholder="Correo"> 
+              <small id="correo" class="form-text text-muted">Correo del Proveedor.</small>
+            </div>
           </div> 
-          <div class="form-group"> 
-              <label for="nombre">Nombre</label> 
-              <input type="text" class="form-control" id="nombre" placeholder="Nombre"> 
-          </div> 
-          <div class="form-group"> 
-              <label for="telefono">Telefono</label> 
-              <input type="text" class="form-control" id="telefono" placeholder="Telefono"> 
-          </div> 
-          <div class="form-group"> 
-            <label for="correo">Correo</label> 
-            <input type="text" class="form-control" id="correo" placeholder="Correo"> 
-        </div> 
           <div class="form-group"> 
             <label for="direccion">Direccion</label> 
             <input type="text" class="form-control" id="direccion" placeholder="Direccion"> 
+            <small id="direccion" class="form-text text-muted">Direccion del Proveedor.</small>
         </div> 
         <div class="form-group"> 
           <label for="descripcion">Descripcion</label> 
-          <input type="text" class="form-control" id="descripcion" placeholder="Descripcion"> 
+          <input type="text" class="form-control color-black" id="descripcion" placeholder="Descripcion">
+          <small id="descripcion" class="form-text text-muted">Descripcion Corta del Proveedor.</small> 
       </div> 
       </div>
       <div class="modal-footer">
@@ -210,7 +220,7 @@
       $("#formulario").trigger("reset");
       $(".modal-header").css( "background-color", "#17a2b8");
       $(".modal-header").css( "color", "white" );
-      $(".modal-title").text("Proveedor Cliente");
+      $(".modal-title").text("Nuevo Proveedor");
       $('#modalCRUD').modal('show');	    
   });
   

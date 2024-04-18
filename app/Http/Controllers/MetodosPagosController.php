@@ -50,7 +50,7 @@ class MetodosPagosController extends Controller
     public function eliminar($id){
         try {
             $admin = MetodosPago::find($id);
-            $this->registro->ActividadRegistro($admin->tipo." Con ".$admin->banco, "Edito un", self::OBJETO);
+            $this->registro->ActividadRegistro($admin->tipo." Con ".$admin->banco, "Elimino un", self::OBJETO);
             $this->Metodopago->EliminarMetodosPago($id);
             return redirect()->route('MetodosPagos')->with('eliminado','Metodo de pago eliminado');
         } catch (\Throwable $th) {
