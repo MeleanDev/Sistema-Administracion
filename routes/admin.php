@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     Route::prefix('Administracion')->group(function () {
 
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/PanelPrincipal', [DashboardController::class, 'index'])->name('dashboard');
         // Ventas
         Route::get('Ventas', [VentasController::class, 'index'])->name('Ventas');
 
