@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MetodosPagosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ProveedoresController;
+use App\Http\Controllers\PuntoVentaController;
 use App\Http\Controllers\RegistroActividadesController;
 use App\Http\Controllers\VentasController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,10 @@ Route::middleware('auth')->group(function () {
     Route::prefix('Sistema')->group(function () {
 
         Route::get('/PanelPrincipal', [DashboardController::class, 'index'])->name('dashboard');
+        
+        // Ventas
+        Route::get('PuntoDeVenta', [PuntoVentaController::class, 'index'])->name('PuntoVentas');
+        
         // Ventas
         Route::get('Ventas', [VentasController::class, 'index'])->name('Ventas');
 

@@ -321,7 +321,7 @@ return [
         ],
         [
             'text' => 'Punto de venta',
-            'url' => '#',
+            'route' => 'PuntoVentas',
             'icon' => 'fas fa-desktop',
         ],
         [
