@@ -11,6 +11,7 @@ class MetodosPago extends Model
 
     protected $fillable = [
         'tipo',
-        'banco'
+        'banco',
+        'cantidad'
     ];
 }

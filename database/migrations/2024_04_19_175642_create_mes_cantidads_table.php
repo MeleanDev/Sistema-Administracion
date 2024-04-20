@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('metodos_pagos', function (Blueprint $table) {
+        Schema::create('mes_cantidads', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo');
-            $table->string('banco');
-            $table->unsignedBigInteger('cantidad')->nullable()->default(0);
+            $table->string('mes');
+            $table->unsignedBigInteger('cantidad');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('metodos_pagos');
+        Schema::dropIfExists('mes_cantidads');
     }
 };
