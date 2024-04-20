@@ -58,18 +58,13 @@
         <div class="informacion">
             <div class="row">
                 <div class="col-sm">
-                    <x-adminlte-card title="Recaudado este mes" theme="purple" icon="fas fa-lg fa-calculator" collapsible>
-                        <p class="h2 text-center">{{$datosMes->mes}}: {{$datosMes->cantidad}} Bs.s</p>
+                    <x-adminlte-card title="Recaudado este Mes" theme="purple" icon="fas fa-lg fa-calculator" collapsible>
+                        <dt class="text-center" style="font-size: 30px">{{$datosMes->mes}}: {{$datosMes->cantidad}} Bs.s</dt>
                     </x-adminlte-card>
                 </div>
                 <div class="col-sm">
-                    <x-adminlte-card title="Ultimas 5 ventas" theme="purple" icon="fas fa-lg fa-chart-bar" collapsible>
-                        A removable and collapsible card with purple theme...
-                    </x-adminlte-card>
-                </div>
-                <div class="col-sm">
-                    <x-adminlte-card title="5 Productos mas vendidos" theme="purple" icon="fas fa-lg fa-boxes" collapsible>
-                        A removable and collapsible card with purple theme...
+                    <x-adminlte-card title="Cantidad de compras este Mes" theme="purple" icon="fas fa-lg fa-chart-bar" collapsible>
+                        <dt class="text-center" style="font-size: 30px">Total: </dt>
                     </x-adminlte-card>
                 </div>
               </div>

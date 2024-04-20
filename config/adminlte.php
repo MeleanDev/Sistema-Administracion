@@ -320,12 +320,12 @@ return [
             'icon' => 'fas fa-home',
         ],
         [
-            'text' => 'Modo Punto de venta',
+            'text' => 'Punto de venta',
             'url' => '#',
             'icon' => 'fas fa-desktop',
         ],
         [
-            'text' => 'Ventas',
+            'text' => 'Ventas analisis',
             'route' => 'Ventas',
             'icon' => 'fas fa-chart-bar',
         ],
