@@ -59,7 +59,7 @@
             <div class="row">
                 <div class="col-sm">
                     <x-adminlte-card title="Recaudado este mes" theme="purple" icon="fas fa-lg fa-calculator" collapsible>
-                        A removable and collapsible card with purple theme...
+                        <p class="h2 text-center">{{$datosMes->mes}}: {{$datosMes->cantidad}} Bs.s</p>
                     </x-adminlte-card>
                 </div>
                 <div class="col-sm">
