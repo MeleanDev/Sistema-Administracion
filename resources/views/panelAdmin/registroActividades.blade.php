@@ -27,7 +27,7 @@
                   <tr>
                       <th>Usuario</th>
                       <th>Accion</th>  
-                      <th>Fecha y hora</th>           
+                      <th>Mes y Hora</th>           
                   </tr>
               </thead>
               <tbody>
@@ -36,7 +36,7 @@
                   <tr>
                       <th>Usuario</th>
                       <th>Accion</th>  
-                      <th>Fecha y hora</th>                
+                      <th>Mes y Hora</th>                  
                   </tr>
               </tfoot>
       </table>

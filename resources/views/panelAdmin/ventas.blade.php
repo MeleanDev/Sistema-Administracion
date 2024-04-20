@@ -57,7 +57,7 @@
       const ctxx = document.getElementById('Cuentas');
 
       createChart(ctx, cData.data, 'bar', cData.label);
-      createChart(ctxx, cDataCuenta.data, 'bar', cDataCuenta.label);
+      createChart(ctxx, cDataCuenta.data, 'line', cDataCuenta.label);
 
       function createChart(ctx, data, chartType, labels) {
         const colorArray = [
