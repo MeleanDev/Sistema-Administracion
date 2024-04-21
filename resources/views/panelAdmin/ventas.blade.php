@@ -16,9 +16,6 @@
 
 @section('content_body')
     <div class="container">
-      <div class="">
-        <button class="btn btn-info mb-3">General Informe PDF</button>
-      </div>
       <div class="informacion Number">
         <div class="row">
           <div class="col-sm text-center">
@@ -32,7 +29,7 @@
             </x-adminlte-card>
           </div>
           <div class="col-sm text-center">
-            <x-adminlte-card title="Total Cantidad de Ventas Este Mes" theme="success" icon="fas fa-lg fa-search-dollar">
+            <x-adminlte-card title="Recaudacion de Ventas Este Mes" theme="success" icon="fas fa-lg fa-search-dollar">
               <dt>Total : {{$datosMes->cantidad}}Bs.s</dt> 
             </x-adminlte-card>
           </div>
@@ -133,9 +130,6 @@
             </x-adminlte-card>
           </div>
         </div>
-      </div>
-      <div class="tablaVentas">
-
       </div>
     </div>
 @stop
