@@ -15,9 +15,12 @@
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#crear">
             Crear Nueva Factura
         </button>
-        <a href="{{route('Factura.crear')}}" class="btn btn-info">
-          Volver a La Ultima Factura
-        </a>
+        @if ($existeRegistro)
+          <a href="{{route('Factura.crear')}}" class="btn btn-info">
+            Volver a La Ultima Factura
+          </a>
+        @endif
+
     </div> 
     <div class="tablaVentas">
         <div class="table-responsive-md">

@@ -21,4 +21,9 @@ class FacturaTemp extends Model
         'apellido',
         'cedula'
         ];
+
+        public static function existeRegistro($columna, $valor)
+        {
+        return FacturaTemp::where($columna, $valor)->exists();
+        }
 }

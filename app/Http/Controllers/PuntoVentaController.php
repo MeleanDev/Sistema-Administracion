@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ClientesClass;
+use App\Models\FacturaTemp;
 use App\PuntoVentaClass;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,10 @@ class PuntoVentaController extends Controller
     }
 
     public function index(){
+        $existeRegistro = FacturaTemp::existeRegistro('id', 1);
         $clientes = $this->clientes->DatosClientes();
-        return view('panelAdmin.puntoVenta', compact('clientes'));
-    }
+        return view('panelAdmin.puntoVenta', compact('clientes', 'existeRegistro'));
+      }
 
     public function CrearFactura(Request $data){
         try {

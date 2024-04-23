@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ProductosCLass;
+use App\ProveedoresClass;
 use App\RegistroActividadesClass;
 use Illuminate\Http\Request;
 
@@ -10,19 +11,21 @@ class ProductosController extends Controller
 {
     private $Productos;
     private $registro;
+    private $proveedores;
     const OBJETO = "Producto"; // Define la variable constante OBJETO
 
-    public function __construct(ProductosCLass $Productos, RegistroActividadesClass $registro)
+    public function __construct(ProductosCLass $Productos, RegistroActividadesClass $registro, ProveedoresClass $proveedores)
     {
         $this->Productos = $Productos;
         $this->registro = $registro;
+        $this->proveedores = $proveedores;
     }
     public function index(Request $request){
         if ($request->ajax()) {
              $data = $this->Productos->DatosProducto();
              return datatables()->of($data)->toJson();
          }     
-         $proveedores = $this->Productos->DatosProveedor();
+         $proveedores = $this->proveedores->DatosProveedores();
          return view('panelAdmin.productos', compact('proveedores'));
      }
 
