@@ -11,6 +11,11 @@ class ProductosCLass
         return $data;
     }
 
+    public function DatosProductoCount(){
+        $data = Producto::Count();
+        return $data;
+    }
+
     public function BuscarProductoNombre($dat){
         $data = Producto::where('nombre', $dat)->first();
         return $data;

@@ -13,6 +13,12 @@ class AdministradoresClass
         return $data;
     }
 
+    public function DatosAdministradoresCount(){
+
+        $data = User::Count();
+        return $data;
+    }
+
     public function CrearAdmin($datos){
         User::create([
             "name"=> $datos->name,

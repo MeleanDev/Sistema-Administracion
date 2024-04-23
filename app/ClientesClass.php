@@ -12,6 +12,12 @@ class ClientesClass
         return $data;
     }
 
+    public function DatosClientesCount(){
+
+        $data = Cliente::count();
+        return $data;
+    }
+
     public function BuscarClienteId($data){
         
         $data = Cliente::where('id', $data)->first();

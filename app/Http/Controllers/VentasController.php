@@ -2,14 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\DashboardClass;
 use App\Models\MesCantidad;
 use App\Models\MetodosPago;
+use App\PuntoVentaClass;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class VentasController extends Controller
 {
+    private $puntoventa;
+    private $DashboardClass;
+
+    public function __construct(PuntoVentaClass $puntoventa, 
+                                DashboardClass $DashboardClass){
+
+        $this->puntoventa = $puntoventa;
+        $this->DashboardClass = $DashboardClass;
+    }
     public function index(){
+
+        // devolver los producto de factura no terminada
+        $this->puntoventa->reinicialProductoF();
+
+        // renicial tablas de facturatemp y productofactura
+        $this->puntoventa->reinicialTablas();
 
         $Bd = MesCantidad::all();
         $data = []; // Inicializa un arreglo vacío
@@ -25,23 +41,9 @@ class VentasController extends Controller
             $dataCuentas['data'][] = $item->cantidad; // Agrega la cantidad a la clave 'data'
         }
 
-        $nombreMesActual = Carbon::now()->format('F');
-        $actual = match ($nombreMesActual) {
-            'January' => 'Enero',
-            'February' => 'Febrero',
-            'March' => 'Marzo',
-            'April' => 'Abril',
-            'May' => 'Mayo',
-            'June' => 'Junio',
-            'July' => 'Julio',
-            'August' => 'Agosto',
-            'September' => 'Septiembre',
-            'October' => 'Obtubre',
-            'November' => 'Noviembre',
-            'December' => 'Diciembre'
-        };      
-
-        $datosMes = MesCantidad::where('mes', $actual)->first();
+        $mes = Carbon::now()->format('F');
+        $actual = $this->DashboardClass->Mes($mes);   
+        $datosMes = $this->DashboardClass->obtenerMes($actual);
 
         // Solo codifica a JSON si es necesario para un caso de uso específico
         $data['data'] = json_encode($data);
