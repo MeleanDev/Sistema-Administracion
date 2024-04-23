@@ -10,10 +10,14 @@
 
 @section('content_body')
 <div class="container">
+  @include('panelAdmin.alert.alertas')
     <div class="mb-3">
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#crear">
             Crear Nueva Factura
         </button>
+        <a href="{{route('Factura.crear')}}" class="btn btn-info">
+          Volver a La Ultima Factura
+        </a>
     </div> 
     <div class="tablaVentas">
         <div class="table-responsive-md">
@@ -72,7 +76,7 @@
                     </div>
                     <div class="form-group">
                         <label for="factura">Codigo para la factura</label>
-                        <input type="text" name="factura" class="form-control" id="factura" aria-describedby="factura" placeholder="codigo" pattern="^[a-zA-Z0-9]+$" title="Solo se permiten números y letras sin espacios">
+                        <input type="text" name="factura" class="form-control" id="factura" aria-describedby="factura" placeholder="codigo" pattern="^[a-zA-Z0-9]+$" title="Solo se permiten números y letras sin espacios" required>
                         <small id="factura" class="form-text text-muted">Solo Numeros y Letras sin espacios.</small> 
                     </div>
             </div>

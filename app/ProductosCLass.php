@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Models\Producto;
-use App\Models\Proveedor;
 
 class ProductosCLass
 {
@@ -12,9 +11,31 @@ class ProductosCLass
         return $data;
     }
 
-    public function DatosProveedor(){
-        $data = Proveedor::all();
+    public function BuscarProductoNombre($dat){
+        $data = Producto::where('nombre', $dat)->first();
         return $data;
+    }
+
+    public function DescontarCantidad(Producto $producto, $descontar){
+        $producto->update([
+            "cantidad" => $descontar,
+        ]);
+    }
+
+    public function BuscarProductoid($dat){
+        $data = Producto::where('id', $dat)->first();
+        return $data;
+    }
+
+    public function ActualizarCantidadProducto($productoTempcantidad,$productocantidad, Producto $product){
+
+        $valor = $productoTempcantidad;
+        $valor2 = $productocantidad;
+        $total = $valor + $valor2;
+        $product->update([
+            "cantidad" => $total,
+        ]);
+        
     }
 
     public function CrearProducto($data){

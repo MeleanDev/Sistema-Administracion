@@ -8,6 +8,7 @@
 
 @section('content_body')
 <div class="p-3 mb-2">
+    @include('panelAdmin.alert.alertas')
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#guardarP">
         Agregar Producto
@@ -28,7 +29,7 @@
             <div class="modal-body">
                 <h2 class="font-weight-bold" style="margin: 0auto; text-align:center">Elije un Producto para la factura</h2>
                 <br>
-                <form method="POST" action="#">
+                <form method="POST" action="{{route('Factura.guardarPro')}}">
                     @csrf
                     <div class="form-group">
                         <label for="producto">Selecciona el Producto</label>
@@ -96,7 +97,7 @@
     <table id="registros" class="table table-striped" style="width:100%">
         <thead class="p-3 mb-2 bg-info text-white">
             <tr>
-                <th class="text-center" style="width: 5%">id</th>
+                <th class="text-center" style="width: 5%">Num</th>
                 <th class="text-center" style="width: 60%">productos</th>
                 <th class="text-center" style="width: 15%">cantidad</th>
                 <th class="text-center" style="width: 10%">Precios</th>
@@ -111,14 +112,14 @@
                     <td class="text-center">{{$item->cantidad}}</td>
                     <td class="text-center">{{$item->precio}}</td>
                     <td class="text-center">
-                        <a href="#" class="btn btn-danger btn-san"><i class="fa fa-trash"> Eliminar</i></a>
+                        <a href="{{route('Factura.eliminar',$item->id)}}" class="btn btn-danger btn-san"><i class="fa fa-trash"> Eliminar</i></a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
         <tfoot class="p-3 mb-2 bg-info text-white">
             <tr>
-                <th class="text-center" style="width: 5%">id</th>
+                <th class="text-center" style="width: 5%">Num</th>
                 <th class="text-center" style="width: 60%">producto</th>
                 <th class="text-center" style="width: 15%">cantidad</th>
                 <th class="text-center" style="width: 10%">Precios</th>

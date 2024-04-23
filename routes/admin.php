@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
         Route::post('PuntoDeVenta/datos', [PuntoVentaController::class, 'CrearFactura'])->name('PuntoVentas.crear');
         
         Route::get('Factura/Crear', [FacturaTempController::class, 'index'])->name('Factura.crear');
+        Route::post('Factura/guardarProducto', [FacturaTempController::class, 'guardarPro'])->name('Factura.guardarPro');
+        Route::get('Factura/eliminarProducto/{id}', [FacturaTempController::class, 'eliminar'])->name('Factura.eliminar');
         
         // Ventas
         Route::get('Ventas', [VentasController::class, 'index'])->name('Ventas');

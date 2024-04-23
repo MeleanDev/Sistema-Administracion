@@ -44,6 +44,29 @@
                 </div>
               </x-adminlte-card>
             </div>
+        </div>
+      </div>
+      <div class="informacion Number">
+        <div class="row">
+          <div class="col-sm text-center">
+            <x-adminlte-card title="Recaudacion Total Este Año" theme="success" icon="fas fa-lg fa-comment-dollar">
+              <dt>Total : {{ App\Models\MesCantidad::sum('cantidad'); }} Bs.s</dt> 
+            </x-adminlte-card>
+          </div>
+          <div class="col-sm text-center">
+            <x-adminlte-card title="Total Cantidad de Ventas Este Año" theme="success" icon="fas fa-lg fa-clipboard-check">
+              <dt>Total : </dt> 
+            </x-adminlte-card>
+          </div>
+          <div class="col-sm text-center">
+            <x-adminlte-card title="Recaudacion de Ventas Este Mes" theme="success" icon="fas fa-lg fa-search-dollar">
+              <dt>Total : {{$datosMes->cantidad}}Bs.s</dt> 
+            </x-adminlte-card>
+          </div>
+        </div>
+      </div>
+      <div class="informacionsd">
+        <div class="row">
             <div class="col-sm" style="width: 100%">
               <x-adminlte-card body-class="bg-white" title="Recaudacion en distinto medios de pago 2024" theme="info" icon="fas fa-lg fa-chart-pie" collapsible >
                 <div>
@@ -51,39 +74,79 @@
                 </div>
               </x-adminlte-card>
             </div>
+            <div class="col-sm text-center">
+              <x-adminlte-card title="5 Productos Mas Vendidos" theme="info" icon="fas fa-lg fa-comment-dollar" collapsible >
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Producto</th>
+                      <th>Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                    </tr>
+                    <tr>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                    </tr>
+                    <tr>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                    </tr>
+                    <tr>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                    </tr>
+                    <tr>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </x-adminlte-card>
+            </div>
         </div>
       </div>
       <div class="informacion tableClienteProducto">
         <div class="row">
           <div class="col-sm text-center">
-            <x-adminlte-card title="5 Productos Mas Vendidos" theme="info" icon="fas fa-lg fa-comment-dollar" collapsible >
+            <x-adminlte-card title="5 Clientes con mayores compras" theme="info" icon="fas fa-lg fa-clipboard-check" collapsible >
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                  </tr>
+                    <th>Cliente</th>
+                    <th>Cantidad dinero</th>
+                    <th>Compras</th>
+                  <tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>Mark</td>
                     <td>Otto</td>
+                    <td>@mdo</td>
                   </tr>
                   <tr>
                     <td>Mark</td>
                     <td>Otto</td>
+                    <td>@mdo</td>
                   </tr>
                   <tr>
                     <td>Mark</td>
                     <td>Otto</td>
+                    <td>@mdo</td>
                   </tr>
                   <tr>
                     <td>Mark</td>
                     <td>Otto</td>
+                    <td>@mdo</td>
                   </tr>
                   <tr>
                     <td>Mark</td>
                     <td>Otto</td>
+                    <td>@mdo</td>
                   </tr>
                 </tbody>
               </table>

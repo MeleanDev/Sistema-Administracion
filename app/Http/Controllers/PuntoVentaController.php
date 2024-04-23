@@ -2,28 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cliente;
-use App\Models\FacturaTemp;
+use App\ClientesClass;
+use App\PuntoVentaClass;
 use Illuminate\Http\Request;
 
 class PuntoVentaController extends Controller
 {
+    private $puntoventa;
+    private $clientes;
+
+    public function __construct(PuntoVentaClass $puntoventa, ClientesClass $clientes)
+    {
+        $this->puntoventa = $puntoventa;
+        $this->clientes = $clientes;
+    }
+
     public function index(){
-        $clientes = Cliente::all();
+        $clientes = $this->clientes->DatosClientes();
         return view('panelAdmin.puntoVenta', compact('clientes'));
     }
 
     public function CrearFactura(Request $data){
+        try {
+            // devolver los producto de factura no terminada
+            $this->puntoventa->reinicialProductoF();
 
-        FacturaTemp::truncate();
-        $cliente = Cliente::where('id', $data->cliente)->first();
-        FacturaTemp::create([
-            "factura" => $data->factura,
-            "admin" => auth()->user()->name,
-            "nombre" => $cliente->nombre,
-            "apellido" => $cliente->apellido,
-            "cedula" => $cliente->cedula,
-        ]);
-        return redirect()->route('Factura.crear');
+            // renicial tablas de facturatemp y productofactura
+            $this->puntoventa->reinicialTablas();
+            
+            // se agarran los datos de $data para empezar con la factura con los datos del cliente
+            $this->puntoventa->ClienteFactura($data);
+
+            return redirect()->route('Factura.crear');
+        } catch (\Throwable $th) {
+            return redirect()->route('PuntoVentas')->with('incorrectamente', 'Cliente no encontrado en la base de dato');
+        }
     }
 }
