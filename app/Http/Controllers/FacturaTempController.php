@@ -70,4 +70,8 @@ class FacturaTempController extends Controller
             return redirect()->route('Factura.crear')->with('incorrectamente', 'Producto No eliminado de la factura');
         }
     }
+
+    public function crearF(){
+        
+    }
 }
