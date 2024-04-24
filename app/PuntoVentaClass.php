@@ -36,9 +36,10 @@ class PuntoVentaClass
         return $datos;
     }
 
-    public function ProductoTempCrear($nombre, $comprar, $preciot){
+    public function ProductoTempCrear($nombre, $comprar, $preciot, $precioUni){
         ProductoTemp::create([
             "producto" => $nombre,
+            "precioUni" => $precioUni,
             "cantidad" => $comprar,
             "precio" => $preciot,
         ]);

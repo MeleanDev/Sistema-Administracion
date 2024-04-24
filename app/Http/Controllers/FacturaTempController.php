@@ -44,7 +44,7 @@ class FacturaTempController extends Controller
 
                 $this->puntoventa->ProductoDescontar($producto, $descontar);
 
-                $this->puntoventa->ProductoTempCrear($producto->nombre, $comprar,$preciot );
+                $this->puntoventa->ProductoTempCrear($producto->nombre, $comprar, $preciot, $precio);
 
                 return redirect()->route('Factura.crear')->with('correctamente', 'Producto Agregado a la factura');
             }

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('producto_temps', function (Blueprint $table) {
             $table->id();
             $table->string('producto');
+            $table->unsignedBigInteger('precioUni')->nullable()->default(0);
             $table->unsignedBigInteger('cantidad')->nullable()->default(0);
             $table->unsignedBigInteger('precio')->nullable()->default(0);
             $table->timestamps();

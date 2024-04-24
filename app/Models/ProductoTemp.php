@@ -11,6 +11,7 @@ class ProductoTemp extends Model
 
     protected $fillable = [
         'producto',
+        'precioUni',
         'cantidad',
         'precio'];
 }

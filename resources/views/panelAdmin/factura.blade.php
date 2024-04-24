@@ -4,6 +4,9 @@
 @section('content_header_title', 'Factura')
 @section('content_header_subtitle', 'Generando Venta con Factura')
 
+{{-- Select2 --}}
+@section('plugins.Select2', true)
+
 {{-- Content body: main page content --}}
 
 @section('content_body')
@@ -33,10 +36,14 @@
                     @csrf
                     <div class="form-group">
                         <label for="producto">Selecciona el Producto</label>
-                        <select class="form-control" id="producto" name="producto">
-                            <option selected>Selecciona un Producto</option>
+                        <select class="form-control" id="producto" name="producto" style="width: 100%">
+                            <option></option>
                             @foreach ($productos as $item)
-                                <option value="{{$item->id}}">{{$item->nombre}} - {{$item->cantidad}}</option>
+                                @if ($item->cantidad === 0)
+                                    
+                                @else
+                                    <option value="{{$item->id}}">{{$item->nombre}} - {{$item->precio}} Bs.s - Disponibles: {{$item->cantidad}}</option>
+                                @endif
                             @endforeach
                         </select>
                         <small id="producto" class="form-text text-muted">Primero dice el nombre y luego la cantidad (Nombre - cantida disponible).</small>
@@ -97,11 +104,12 @@
     <table id="registros" class="table table-striped" style="width:100%">
         <thead class="p-3 mb-2 bg-info text-white">
             <tr>
-                <th class="text-center" style="width: 5%">Num</th>
-                <th class="text-center" style="width: 60%">productos</th>
-                <th class="text-center" style="width: 15%">cantidad</th>
-                <th class="text-center" style="width: 10%">Precios</th>
-                <th class="text-center" style="width: 10%">Accion</th>
+                <th class="text-center">Num</th>
+                <th class="text-center">productos</th>
+                <th class="text-center">Precio Unid.</th>
+                <th class="text-center">cantidad</th>
+                <th class="text-center">Precio Total</th>
+                <th class="text-center">Accion</th>
             </tr>
         </thead>
         <tbody>
@@ -109,6 +117,7 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td class="text-center">{{$item->producto}}</td>
+                    <td class="text-center">{{$item->precioUni}}</td>
                     <td class="text-center">{{$item->cantidad}}</td>
                     <td class="text-center">{{$item->precio}}</td>
                     <td class="text-center">
@@ -119,11 +128,12 @@
         </tbody>
         <tfoot class="p-3 mb-2 bg-info text-white">
             <tr>
-                <th class="text-center" style="width: 5%">Num</th>
-                <th class="text-center" style="width: 60%">producto</th>
-                <th class="text-center" style="width: 15%">cantidad</th>
-                <th class="text-center" style="width: 10%">Precios</th>
-                <th class="text-center" style="width: 10%">Accion</th>
+                <th class="text-center">Num</th>
+                <th class="text-center">productos</th>
+                <th class="text-center">Precio Unid.</th>
+                <th class="text-center">cantidad</th>
+                <th class="text-center">Precio Total</th>
+                <th class="text-center">Accion</th>
             </tr>
         </tfoot>
     </table>
@@ -140,5 +150,14 @@
 {{-- Push extra scripts --}}
 
 @push('js')
-    
+    <script>
+        $(document).ready(function() {
+            $('#producto').select2({
+                dropdownParent: $('#guardarP'),
+                width: 'resolve',
+                theme: "classic",
+                placeholder: "Selecciona un Producto",
+            });
+        });
+    </script>
 @endpush
