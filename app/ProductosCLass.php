@@ -59,7 +59,7 @@ class ProductosCLass
         $proveed = Producto::where('nombre', $id)->first();
         $proveed->nombre = $data['nombre'];
         $proveed->descripcion = $data['descripcion'];
-        $proveed->proveedor = $data['cantidad'];
+        $proveed->proveedor = $data['proveedor'];
         $proveed->cantidad = $data['cantidad'];
         $proveed->precio = $data['precio'];
         $proveed->save();

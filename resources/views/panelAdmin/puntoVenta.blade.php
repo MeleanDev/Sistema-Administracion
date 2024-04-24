@@ -6,6 +6,9 @@
 @section('content_header_title', 'Punto de venta')
 @section('content_header_subtitle', 'General venta')
 
+{{-- Select2 --}}
+@section('plugins.Select2', true)
+
 {{-- Content body: main page content --}}
 
 @section('content_body')
@@ -69,8 +72,8 @@
                     @csrf
                     <div class="form-group mb-3">
                         <label for="clientes" class="">Selecciona el cliente</label>
-                        <select class="form-control" id="clientes" name="cliente">
-                            <option selected>Selecciona un cliente</option>
+                        <select class="form-control" id="clientes" name="cliente" style="width: 100%" required>
+                            <option></option>
                             @foreach ($clientes as $item)
                                 <option value="{{$item->id}}">{{$item->nombre}} {{$item->apellido}} - {{$item->cedula}}</option>
                             @endforeach
@@ -105,6 +108,15 @@
 
 @push('js')
 <script>
+
+$(document).ready(function() {
+      $('#clientes').select2({
+        dropdownParent: $('#crear'),
+        width: 'resolve',
+        theme: "classic",
+        placeholder: "Selecciona un Cliente",
+      });
+    });
 
 var id, fila;
 var token = $('meta[name="csrf-token"]').attr('content');

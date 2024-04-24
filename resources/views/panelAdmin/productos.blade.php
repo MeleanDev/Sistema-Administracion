@@ -11,6 +11,8 @@
     @section('plugins.Datatables', true)
   {{-- Sweetalert2 --}}
     @section('plugins.Sweetalert2', true)
+    {{-- Select2 --}}
+    @section('plugins.Select2', true)
     
 {{-- Content body: main page content --}}
 
@@ -62,21 +64,22 @@
             <div class="modal-body">
                 <form id="formulario" enctype="application/x-www-form-urlencoded">
                     @csrf
-                <div class="form-group"> 
+                <div class="form-group text-center"> 
                     <label for="nombre">Nombre</label> 
                     <input type="text" class="form-control" id="nombre" placeholder="Nombre"> 
                     <small id="nombre" class="form-text text-muted">Nombre del Producto.</small> 
                 </div> 
-                <div class="form-group"> 
+                <div class="form-group text-center"> 
                     <label for="descripcion">descripcion</label> 
                     <input type="text" class="form-control" id="descripcion" placeholder="Descripcion">
                     <small id="descripcion" class="form-text text-muted">Descripcion corta del Producto.</small>  
                 </div> 
-                <div class="form-row">
+                <div class="form-group text-center">
                   <label for="proveedor">Proveedor del Producto</label>
-                  <select class="form-control mb-2" id="proveedor" name="proveedor">
-                      <option value="Sin Categoria" selected>Sin Proveedor</option>
-                      @foreach ($proveedores as $item)
+                  <select class="form-control mb-2" id="proveedor" name="proveedor" style="width: 100%" required>
+                    <option></option>  
+                    <option value="Sin Proveedor">Sin Proveedor</option>  
+                    @foreach ($proveedores as $item)
                           <option value="{{$item->nombre}}">{{$item->nombre}}</option>
                       @endforeach
                   </select>
@@ -107,13 +110,23 @@
 {{-- Push extra CSS --}}
 
 @push('css')
-    
+<style>
+
+</style>
 @endpush
 
 {{-- Push extra scripts --}}
 
 @push('js')
 <script>
+    $(document).ready(function() {
+      $('#proveedor').select2({
+        dropdownParent: $('#modalCRUD'),
+        width: 'resolve',
+        theme: "classic",
+        placeholder: "Selecciona una opcion",
+      });
+    });
 
     var id, opcion, fila;
     var token = $('meta[name="csrf-token"]').attr('content');
@@ -207,7 +220,9 @@
     
      //para limpiar los campos antes de dar de Crear una Registro
     $("#btnNuevo").click(function(){
-        opcion = 1; //alta           
+        opcion = 1; //alta     
+        $("#proveedor").val("");
+        $('#proveedor').trigger('change');    
         $("#formulario").trigger("reset");
         $(".modal-header").css( "background-color", "#17a2b8");
         $(".modal-header").css( "color", "white" );
@@ -218,7 +233,6 @@
     //Editar        
     $(document).on("click", ".btnEditar", function(){	
         opcion = 2; //editar
-    
         fila = $(this).closest("tr");	        
         id = fila.find('td:eq(0)').text(); //capturo el ID	
                         
@@ -231,6 +245,7 @@
         $("#nombre").val(nombre);
         $("#descripcion").val(descripcion);
         $("#proveedor").val(proveedor);
+        $('#proveedor').trigger('change');
         $("#cantidad").val(cantidad);
         $("#precio").val(precio);
 
