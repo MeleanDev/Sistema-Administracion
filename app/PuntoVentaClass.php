@@ -2,8 +2,9 @@
 
 namespace App;
 
-
+use App\Models\Factura;
 use App\Models\FacturaTemp;
+use App\Models\ProductoFactura;
 use App\Models\ProductoTemp;
 
 class PuntoVentaClass
@@ -17,8 +18,18 @@ class PuntoVentaClass
         $this->clientes = $clientes;
     }
 
+    public function DatosFacturas(){
+        $datos = Factura::all();
+        return $datos;
+    }
+
     public function FacturaTempTodos(){
         $datos = FacturaTemp::all();
+        return $datos;
+    }
+
+    public function RegistroFacturaTemp(){
+        $datos = FacturaTemp::first();
         return $datos;
     }
 
@@ -36,6 +47,59 @@ class PuntoVentaClass
         return $datos;
     }
 
+    public function ProductoTempSum(){
+        $datos = ProductoTemp::sum('cantidad');
+        return $datos;
+    }
+    
+    public function ProductosFactura($factura){
+        $datos = ProductoFactura::where('factura', $factura)->get();
+        return $datos;
+    }
+
+    public function DevolverProductos($datos){
+        foreach ($datos as $item) {
+            $produc = $item->producto;
+            $cantida = $item->cantidad;
+
+            $devolver = $this->productos->BuscarProductoNombre($produc);
+            
+            $cantidaP = $devolver->cantidad + $cantida;
+            
+            $devolver->update([
+                "cantidad" => $cantidaP,
+            ]);
+        }
+    }
+
+    public function BorrarProductos($productosFactura){
+        foreach ($productosFactura as $productoFactura) {
+            $productoFactura->delete();
+        }
+    }
+
+    public function Factura($id){
+        $factura = Factura::where('factura', $id)->first();
+        return $factura;
+    }
+
+    public function FacturaMes($id){
+        $factura = Factura::where('factura', $id)->first();
+        return $factura;
+    }
+
+    public function CrearFacturaCompra($datos, $cantidaProdu, $totalCompra){
+
+        Factura::create([
+            'factura' => $datos->factura,
+            'admin' => $datos->admin,
+            'nombre' => $datos->nombre,
+            'cedula' => $datos->cedula,
+            'cantidadProducto' => $cantidaProdu,
+            'totalCompra' => $totalCompra
+        ]);
+    }
+
     public function ProductoTempCrear($nombre, $comprar, $preciot, $precioUni){
         ProductoTemp::create([
             "producto" => $nombre,
@@ -44,6 +108,18 @@ class PuntoVentaClass
             "precio" => $preciot,
         ]);
     }
+
+    public function guardarProductos($dato, $factura){
+        foreach ($dato as $item) {
+            ProductoFactura::create([
+                "factura" => $factura,
+                "producto" => $item->producto,
+                "precioUni" => $item->precioUni,
+                "cantidad" => $item->cantidad,
+                "precio" => $item->precio
+            ]);
+        }
+    }
     
     public function reinicialProductoF(){
 
@@ -51,8 +127,10 @@ class PuntoVentaClass
         foreach ($datos as $item) {
             $produc = $item->producto;
             $cantida = $item->cantidad;
+
             $devolver = $this->productos->BuscarProductoNombre($produc);
             $cantidaP = $devolver->cantidad + $cantida;
+
             $devolver->update([
                 "cantidad" => $cantidaP,
             ]);

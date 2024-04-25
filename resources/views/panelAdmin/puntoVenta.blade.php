@@ -6,8 +6,13 @@
 @section('content_header_title', 'Punto de venta')
 @section('content_header_subtitle', 'General venta')
 
-{{-- Select2 --}}
-@section('plugins.Select2', true)
+{{-- plugins --}}
+  {{-- Datatable --}}
+  @section('plugins.Datatables', true)
+  {{-- Select2 --}}
+  @section('plugins.Select2', true)
+  {{-- Sweetalert2 --}}
+  @section('plugins.Sweetalert2', true)
 
 {{-- Content body: main page content --}}
 
@@ -30,12 +35,12 @@
             <table class="table table-striped table-hover" cellspacing="0" id="datatable" style="width: 100%">
                     <thead class="bg-info">
                         <tr>
-                            <th>Admin</th>
-                            <th>Cliente</th>  
-                            <th>Cedula Cliente</th>  
-                            <th>Cantidad Productos</th>  
-                            <th>Factura</th>
-                            <th>Total Compra</th>  
+                          <th>Factura</th>
+                          <th>Admin</th>
+                          <th>Cliente</th>  
+                          <th>Cedula Cliente</th>  
+                          <th>Cantidad Productos</th>  
+                          <th>Total Compra</th>  
                             <th class="text-center">Accion</th>                  
                         </tr>
                     </thead>
@@ -43,11 +48,11 @@
                     </tbody>
                     <tfoot class="bg-info">
                         <tr>
+                            <th>Factura</th>
                             <th>Admin</th>
                             <th>Cliente</th>  
                             <th>Cedula Cliente</th>  
                             <th>Cantidad Productos</th>  
-                            <th>Factura</th>
                             <th>Total Compra</th>  
                             <th class="text-center">Accion</th>                
                         </tr>
@@ -116,63 +121,106 @@ $(document).ready(function() {
         theme: "classic",
         placeholder: "Selecciona un Cliente",
       });
-    });
+});
 
 var id, fila;
 var token = $('meta[name="csrf-token"]').attr('content');
-  
-// Borrar
-$(document).on("click", ".btnBorrar", function(){
-    fila = $(this);
-    id = $(this).closest('tr').find('td:eq(4)').text();
-    Swal.fire({
-      title: '¿ Estas seguro que desea eliminar el factura #'+(id.toString())+' ?',
-      text: "¡ No podrás revertir esto !",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: '¡ Sí, bórralo !',
-    }).then((result) => {
-      if (result.isConfirmed){
-        $.ajax({
-          url: "{{route('Clientes.eliminar')}}",
-          type: "POST",
-          datatype:"json",
-          data: {
-            _token: token,
-            id:id
-          },
-          success: function(data) {
-            if (data.success) {
-              // Eliminar la fila de la tabla
-              table.row('#' + id).remove().draw();
-          
-              // Mostrar mensaje de éxito con temporizador
-              Swal.fire({
-                title: '¡ Eliminado !',
-                text: 'Tu registro ha sido eliminado.',
-                icon: 'success',
-                timer: 2000,
-                showConfirmButton: false,
-                timerProgressBar: true,
-              });
-            } else {
-              // Mostrar mensaje de error
-              Swal.fire({
-                title: '¡ Error !',
-                text: 'Tu registro no ha sido eliminado.',
-                icon: 'error',
-                timer: 2000,
-                showConfirmButton: false,
-                timerProgressBar: true,
-              });
-            }
-          }
-        });
-      }
-    });
+
+var table = new DataTable('#datatable', {
+        ajax: '{{route('PuntoVentas')}}',
+        processing: true,
+        serverSide: true,
+        lengthMenu: [[10, 25, 50, 100],[10, 25, 50, 100]],
+        columns: [
+                {data: 'factura', name: 'factura', className: 'text-center'},
+                {data: 'admin', name: 'admin', className: 'text-center'},
+                {data: 'nombre', name: 'nombre', className: 'text-center'},         
+                {data: 'cedula', name: 'cedula', className: 'text-center'},  
+                {data: 'cantidadProducto', name: 'cantidadProducto', className: 'text-center'},         
+                {data: 'totalCompra', name: 'totalCompra', className: 'text-center'}, 
+                {"defaultContent": "<div class=\"dropdown text-center\"><button class=\"btn btn-primary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"> Acción </button><div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\"><button class='dropdown-item bg-warning text-light btnEditar'><i class='fas fa-edit'> Editar</i></button><button class='dropdown-item bg-danger text-light btnBorrar'><i class='fas fa-lg fa-trash'> Eliminar</i></button></div></div>"}
+        ],
+            columnDefs: [{orderable: false, targets: 6}],
+            language: {
+                    "zeroRecords": "No se encontraron resultados",
+                    "emptyTable": "Ningún dato disponible en esta tabla",
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sSearch": "Buscar:",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast":"Último",
+                        "sNext":"Siguiente",
+                        "sPrevious": "Anterior"
+                     },
+                     "sProcessing":"Procesando...",
+            },        
 });
+  
+
+    //Editar        
+    $(document).on("click", ".btnEditar", function(){	
+        opcion = 2; //editar
+        fila = $(this).closest("tr");	        
+        id = fila.find('td:eq(0)').text(); //capturo el ID	
+                        
+           
+    });
+    
+    //Borrar
+    $(document).on("click", ".btnBorrar", function(){
+      fila = $(this);
+      id = $(this).closest('tr').find('td:eq(0)').text();
+      Swal.fire({
+        title: '¿ Estas seguro que desea eliminar el registro #'+(id.toString())+' ?',
+        text: "¡ No podrás revertir esto !",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '¡ Sí, bórralo !',
+      }).then((result) => {
+        if (result.isConfirmed){
+          $.ajax({
+            url: "{{route('PuntoVentas.borrar')}}",
+            type: "post",
+            datatype:"json",
+            data: {
+              _token: token,
+              id:id
+            },
+            success: function(data) {
+              if (data.success) {
+                // Eliminar la fila de la tabla
+                table.row('#' + id).remove().draw();
+            
+                // Mostrar mensaje de éxito con temporizador
+                Swal.fire({
+                  title: '¡ Eliminado !',
+                  text: 'Tu registro ha sido eliminado.',
+                  icon: 'success',
+                  timer: 2000,
+                  showConfirmButton: false,
+                  timerProgressBar: true,
+                });
+              } else {
+                // Mostrar mensaje de error
+                Swal.fire({
+                  title: '¡ Error !',
+                  text: 'Tu registro no ha sido eliminado.',
+                  icon: 'error',
+                  timer: 2000,
+                  showConfirmButton: false,
+                  timerProgressBar: true,
+                });
+              }
+            }
+          });
+        }
+      });
+    }); 
 
 </script>
 @endpush

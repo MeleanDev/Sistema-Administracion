@@ -4,6 +4,9 @@
 @section('content_header_title', 'Factura')
 @section('content_header_subtitle', 'Generando Venta con Factura')
 
+{{-- Sweetalert2 --}}
+@section('plugins.Sweetalert2', true)
+
 {{-- Select2 --}}
 @section('plugins.Select2', true)
 
@@ -16,9 +19,10 @@
     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#guardarP">
         Agregar Producto
     </button>
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Crear">
+    <button type="button" class="btn btn-success" id="createFacturaButton">
         Crear Factura
     </button>
+
     <!-- Modal -->
     <div class="modal fade" id="guardarP" tabindex="-1" role="dialog" aria-labelledby="guardarP" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -62,6 +66,8 @@
         </div>
         </div>
     </div>
+
+
 </div>
 <div class="p-3 mb-2">
     <form action="#">
@@ -158,6 +164,27 @@
                 theme: "classic",
                 placeholder: "Selecciona un Producto",
             });
+        });
+    </script>
+    <script>
+        const createFacturaButton = document.getElementById('createFacturaButton');
+
+        createFacturaButton.addEventListener('click', () => {
+        Swal.fire({
+            title: '¿Está seguro de crear una factura?',
+            text: "Esta acción no se puede deshacer.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, crear'
+        }).then((result) => {
+            if (result.isConfirmed) {
+            // Redirect to the web page after confirmation
+            const compraCrearRoute = '{{ route('Compra.crear') }}';
+            window.location.href = compraCrearRoute;
+            }
+        });
         });
     </script>
 @endpush

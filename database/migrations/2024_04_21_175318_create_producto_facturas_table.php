@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('factura');
             $table->string('producto');
+            $table->unsignedBigInteger('precioUni')->nullable()->default(0);
             $table->unsignedBigInteger('cantidad')->nullable()->default(0);
             $table->unsignedBigInteger('precio')->nullable()->default(0);
             $table->timestamps();

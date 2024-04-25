@@ -20,10 +20,14 @@ Route::middleware('auth')->group(function () {
         // Punto de venta
         Route::get('PuntoDeVenta', [PuntoVentaController::class, 'index'])->name('PuntoVentas');
         Route::post('PuntoDeVenta/datos', [PuntoVentaController::class, 'CrearFactura'])->name('PuntoVentas.crear');
-        
+        Route::get('PuntoDeVenta/CompraRealizada/editar', [PuntoVentaController::class, 'editarF'])->name('PuntoVentas.editar');
+        Route::post('PuntoDeVenta/CompraRealizada/borrar', [PuntoVentaController::class, 'borrarF'])->name('PuntoVentas.borrar');
+
+        // Factura
         Route::get('Factura/Crear', [FacturaTempController::class, 'index'])->name('Factura.crear');
         Route::post('Factura/guardarProducto', [FacturaTempController::class, 'guardarPro'])->name('Factura.guardarPro');
         Route::get('Factura/eliminarProducto/{id}', [FacturaTempController::class, 'eliminar'])->name('Factura.eliminar');
+        Route::get('Factura/CompraRealizada', [FacturaTempController::class, 'crearF'])->name('Compra.crear');
         
         // Ventas
         Route::get('Ventas', [VentasController::class, 'index'])->name('Ventas');

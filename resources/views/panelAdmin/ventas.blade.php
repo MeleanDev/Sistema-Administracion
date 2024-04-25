@@ -25,7 +25,7 @@
           </div>
           <div class="col-sm text-center">
             <x-adminlte-card title="Total Cantidad de Ventas Este Año" theme="success" icon="fas fa-lg fa-clipboard-check">
-              <dt>Total : </dt> 
+              <dt>Total : {{ App\Models\MesCantidad::sum('Compras'); }}</dt> 
             </x-adminlte-card>
           </div>
           <div class="col-sm text-center">

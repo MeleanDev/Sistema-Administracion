@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mes_cantidads', function (Blueprint $table) {
+        Schema::create('facturas', function (Blueprint $table) {
             $table->id();
-            $table->string('mes');
-            $table->unsignedBigInteger('cantidad');
-            $table->unsignedBigInteger('Compras')->nullable()->default(0);
+            $table->string('factura');
+            $table->string('admin');
+            $table->string('nombre');
+            $table->string('cedula');
+            $table->unsignedBigInteger('cantidadProducto')->nullable()->default(0);
+            $table->unsignedBigInteger('totalCompra')->nullable()->default(0);
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mes_cantidads');
+        Schema::dropIfExists('facturas');
     }
 };

@@ -17,6 +17,7 @@ class ProductoFactura extends Model
     protected $fillable = [
         'factura',
         'producto',
+        'precioUni',
         'cantidad',
         'precio'];
 }

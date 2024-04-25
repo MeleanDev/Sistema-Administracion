@@ -14,5 +14,5 @@ class MesCantidad extends Model
      *
      * @var array<string>
      */
-    protected $fillable = ['mes', 'cantidad'];
+    protected $fillable = ['mes', 'cantidad', 'Compras'];
 }

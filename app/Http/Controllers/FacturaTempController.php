@@ -4,18 +4,28 @@ namespace App\Http\Controllers;
 
 use App\ProductosCLass;
 use App\PuntoVentaClass;
+use App\RegistroActividadesClass;
+use App\VentaAnalisisClass;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FacturaTempController extends Controller
 {
     private $puntoventa;
     private $producto;
+    private $registro;
+    private $VentaAnalisis;
+    const OBJETO = "Factura"; // Define la variable constante OBJETO
 
-    public function __construct(PuntoVentaClass $puntoventa, ProductosCLass $producto)
+    public function __construct(PuntoVentaClass $puntoventa, 
+                                ProductosCLass $producto, 
+                                RegistroActividadesClass $registro, 
+                                VentaAnalisisClass $VentaAnalisis)
     {
         $this->puntoventa = $puntoventa;
         $this->producto = $producto;
-
+        $this->registro = $registro;
+        $this->VentaAnalisis = $VentaAnalisis;
     }
 
     public function index(){
@@ -72,6 +82,44 @@ class FacturaTempController extends Controller
     }
 
     public function crearF(){
+        try {
+
+           // Crear datos de la factura 
+            $datosFactura = $this->puntoventa->RegistroFacturaTemp();
+            $cantidadProduc = $this->puntoventa->ProductoTempSum();
+            $totalCompra = $this->puntoventa->ProductoTempSuma();
+            $this->puntoventa->CrearFacturaCompra($datosFactura, $cantidadProduc, $totalCompra);
+
+            // Carga datos analisis
+            $mes = Carbon::now()->format('F');
+            $actual = $this->VentaAnalisis->Mes($mes);
+            $datosMes = $this->VentaAnalisis->obtenerMes($actual);
+
+                // sumamos las cantidades de compras 
+                $actualCantidad = $datosMes->cantidad;
+                $actualCompra = $datosMes->Compras;
+                
+                // Sumamos las compras  
+                $sumaCantidad = $actualCantidad + $totalCompra;
+                $sumaCompra = $actualCompra + 1;
+
+            // Cargamos el registro
+            $this->VentaAnalisis->SumarCompraMes($datosMes, $sumaCompra, $sumaCantidad);
+
+            // Registramos los productos en la BD
+            $productosGuardar = $this->puntoventa->ProductoTempTodos();
+            $this->puntoventa->guardarProductos( $productosGuardar ,$datosFactura->factura);
+
+            // Registramos la actividad
+            $this->registro->ActividadRegistro($datosFactura->factura, "Creo una", self::OBJETO);
+
+            // renicial tablas de facturatemp y productofactura
+            $this->puntoventa->reinicialTablas();
+
+            return redirect()->route('PuntoVentas')->with('correctamente', 'Factura Creada Exitosamente');
+        } catch (\Throwable $th) {
+            return redirect()->route('PuntoVentas')->with('incorrectamente', 'Factura No Creada');
+        }
         
     }
 }

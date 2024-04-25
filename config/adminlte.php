@@ -157,7 +157,7 @@ return [
     'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => ['xs' => true, 'lg' => false],
-    'layout_dark_mode' => true,
+    'layout_dark_mode' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -297,7 +297,7 @@ return [
         // Navbar items:
         [
             'type' => 'darkmode-widget',
-            'topnav_right' => true,     // Or "topnav => true" to place on the left.
+            'topnav_right' => false,     // Or "topnav => true" to place on the left.
         ],
         [
             'type' => 'navbar-search',

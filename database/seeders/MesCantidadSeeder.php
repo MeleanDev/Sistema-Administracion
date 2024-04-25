@@ -15,18 +15,18 @@ class MesCantidadSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            array('mes' => 'Enero', 'Cantidad' => '2344'),
-            array('mes' => 'Febrero', 'Cantidad' => '4444'),
-            array('mes' => 'Marzo', 'Cantidad' => '33'),
-            array('mes' => 'Abril', 'Cantidad' => '0'),
-            array('mes' => 'Mayo', 'Cantidad' => '5555'),
-            array('mes' => 'Junio', 'Cantidad' => '66'),
-            array('mes' => 'Julio', 'Cantidad' => '0'),
-            array('mes' => 'Agosto', 'Cantidad' => '22'),
-            array('mes' => 'Septiembre', 'Cantidad' => '0'),
-            array('mes' => 'Octubre', 'Cantidad' => '4234'),
-            array('mes' => 'Noviembre', 'Cantidad' => '23423'),
-            array('mes' => 'Diciembre', 'Cantidad' => '42'),
+            array('mes' => 'Enero', 'Cantidad' => 0, 'Compras' => 0),
+            array('mes' => 'Febrero', 'Cantidad' => 0, 'Compras' => 0),
+            array('mes' => 'Marzo', 'Cantidad' => 0, 'Compras' => 0),
+            array('mes' => 'Abril', 'Cantidad' => 0, 'Compras' => 0),
+            array('mes' => 'Mayo', 'Cantidad' => 0, 'Compras' => 0),
+            array('mes' => 'Junio', 'Cantidad' => 0, 'Compras' => 0),
+            array('mes' => 'Julio', 'Cantidad' => 0, 'Compras' => 0),
+            array('mes' => 'Agosto', 'Cantidad' => 0, 'Compras' => 0),
+            array('mes' => 'Septiembre', 'Cantidad' => 0, 'Compras' => 0),
+            array('mes' => 'Octubre', 'Cantidad' => 0, 'Compras' => 0),
+            array('mes' => 'Noviembre', 'Cantidad' => 0, 'Compras' => 0),
+            array('mes' => 'Diciembre', 'Cantidad' => 0, 'Compras' => 0),
         ];
         MesCantidad::insert($data);
     }

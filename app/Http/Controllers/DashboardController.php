@@ -46,6 +46,7 @@ class DashboardController extends Controller
         $actual = $this->DashboardClass->Mes($mes);   
         $datosMes = $this->DashboardClass->obtenerMes($actual);
         
+        
         return view('dashboard', compact('admins','clientes','productos', 'datosMes'));
     }
 }
