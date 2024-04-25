@@ -36,7 +36,7 @@ class PuntoVentaController extends Controller
         $existeRegistro = FacturaTemp::existeRegistro('id', 1);
         $clientes = $this->clientes->DatosClientes();
         return view('panelAdmin.puntoVenta', compact('clientes', 'existeRegistro'));
-      }
+    }
 
     public function CrearFactura(Request $data){
         try {
