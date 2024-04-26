@@ -24,7 +24,7 @@
             </x-adminlte-card>
           </div>
           <div class="col-sm text-center">
-            <x-adminlte-card title="Total Cantidad de Ventas Este Año" theme="success" icon="fas fa-lg fa-clipboard-check">
+            <x-adminlte-card title="Ventas Facturadas este Año" theme="success" icon="fas fa-lg fa-clipboard-check">
               <dt>Total : {{ App\Models\MesCantidad::sum('Compras'); }}</dt> 
             </x-adminlte-card>
           </div>
@@ -46,21 +46,16 @@
             </div>
         </div>
       </div>
-      <div class="informacion Number">
+      <div class="informacion Productos">
         <div class="row">
           <div class="col-sm text-center">
-            <x-adminlte-card title="Recaudacion Total Este Año" theme="success" icon="fas fa-lg fa-comment-dollar">
-              <dt>Total : {{ App\Models\MesCantidad::sum('cantidad'); }} Bs.s</dt> 
+            <x-adminlte-card title="Productos Vendidos" theme="success" icon="far fa-lg fa-check-square">
+              <dt>Total : {{App\Models\ProductoFactura::sum('cantidad')}} Productos Vendidos</dt> 
             </x-adminlte-card>
           </div>
           <div class="col-sm text-center">
-            <x-adminlte-card title="Total Cantidad de Ventas Este Año" theme="success" icon="fas fa-lg fa-clipboard-check">
-              <dt>Total : </dt> 
-            </x-adminlte-card>
-          </div>
-          <div class="col-sm text-center">
-            <x-adminlte-card title="Recaudacion de Ventas Este Mes" theme="success" icon="fas fa-lg fa-search-dollar">
-              <dt>Total : {{$datosMes->cantidad}}Bs.s</dt> 
+            <x-adminlte-card title="Productos en el Almancen" theme="success" icon="fas fa-lg fa-box-open">
+              <dt>Total : {{App\Models\Producto::sum('cantidad')}} Productos Disponibles</dt> 
             </x-adminlte-card>
           </div>
         </div>
@@ -74,120 +69,50 @@
                 </div>
               </x-adminlte-card>
             </div>
-            <div class="col-sm text-center">
-              <x-adminlte-card title="5 Productos Mas Vendidos" theme="info" icon="fas fa-lg fa-comment-dollar" collapsible >
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Producto</th>
-                      <th>Cantidad</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                    </tr>
-                    <tr>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                    </tr>
-                    <tr>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                    </tr>
-                    <tr>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                    </tr>
-                    <tr>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </x-adminlte-card>
-            </div>
         </div>
       </div>
       <div class="informacion tableClienteProducto">
         <div class="row">
           <div class="col-sm text-center">
-            <x-adminlte-card title="5 Clientes con mayores compras" theme="info" icon="fas fa-lg fa-clipboard-check" collapsible >
+            <x-adminlte-card title="5 Productos mas vendidos" theme="info" icon="fas fa-lg fa-clipboard-check" collapsible >
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>Cliente</th>
-                    <th>Cantidad dinero</th>
-                    <th>Compras</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
                   <tr>
                 </thead>
                 <tbody>
+                  @foreach ($mejoresProductFac as $item)
                   <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <td>{{$item->producto}}</td>
+                    <td>{{$item->cantidad}}</td>
                   </tr>
-                  <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
+                  @endforeach
                 </tbody>
               </table>
             </x-adminlte-card>
           </div>
           <div class="col-sm text-center">
-            <x-adminlte-card title="5 Clientes con mayores compras" theme="info" icon="fas fa-lg fa-clipboard-check" collapsible >
+            <x-adminlte-card title="5 Mejores Ventas Facturadas" theme="info" icon="fas fa-lg fa-comment-dollar" collapsible >
               <table class="table table-striped">
                 <thead>
                   <tr>
+                    <th>Factura</th>
                     <th>Cliente</th>
-                    <th>Cantidad dinero</th>
-                    <th>Compras</th>
-                  <tr>
+                    <th>Facturado</th>
+                    <th>Mes</th>
+                  </tr>
                 </thead>
                 <tbody>
+                  @foreach ($mejoresVentasFac as $item)
                   <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <td>{{$item->factura}}</td>
+                    <td>{{$item->cedula}}</td>
+                    <td>{{$item->totalCompra}}</td>
+                    <td>{{ Carbon\Carbon::parse($item->created_at)->format('F') }}</td>
                   </tr>
-                  <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
+                  @endforeach
                 </tbody>
               </table>
             </x-adminlte-card>

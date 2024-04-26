@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\ClientesClass;
 use App\Models\FacturaTemp;
 use App\PuntoVentaClass;
 use App\RegistroActividadesClass;
 use App\VentaAnalisisClass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class PuntoVentaController extends Controller
 {
@@ -52,23 +52,6 @@ class PuntoVentaController extends Controller
             return redirect()->route('Factura.crear');
         } catch (\Throwable $th) {
             return redirect()->route('PuntoVentas')->with('incorrectamente', 'Cliente no encontrado en la base de dato');
-        }
-    }
-
-    public function editarF(Request $data){
-        try {
-            // devolver los producto de factura no terminada
-            $this->puntoventa->reinicialProductoF();
-
-            // renicial tablas de facturatemp y productofactura
-            $this->puntoventa->reinicialTablas();
-            
-            // se agarran los datos de $data para empezar con la factura con los datos del cliente
-            $this->puntoventa->ClienteFactura($data);
-
-            return redirect()->route('PuntoVentas.editar');
-        } catch (\Throwable $th) {
-            return redirect()->route('PuntoVentas')->with('incorrectamente', 'Fallas en el sistema');
         }
     }
 

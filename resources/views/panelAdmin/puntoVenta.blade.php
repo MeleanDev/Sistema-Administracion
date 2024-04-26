@@ -138,7 +138,7 @@ var table = new DataTable('#datatable', {
                 {data: 'cedula', name: 'cedula', className: 'text-center'},  
                 {data: 'cantidadProducto', name: 'cantidadProducto', className: 'text-center'},         
                 {data: 'totalCompra', name: 'totalCompra', className: 'text-center'}, 
-                {"defaultContent": "<div class=\"dropdown text-center\"><button class=\"btn btn-primary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"> Acción </button><div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\"><button class='dropdown-item bg-warning text-light btnEditar'><i class='fas fa-edit'> Editar</i></button><button class='dropdown-item bg-danger text-light btnBorrar'><i class='fas fa-lg fa-trash'> Eliminar</i></button></div></div>"}
+                {"defaultContent": "<div class=\"dropdown text-center\"><button class=\"btn btn-primary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"> Acción </button><div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\"><button class='dropdown-item bg-danger text-light btnBorrar'><i class='fas fa-lg fa-trash'> Eliminar</i></button></div></div>"}
         ],
             columnDefs: [{orderable: false, targets: 6}],
             language: {
@@ -157,18 +157,7 @@ var table = new DataTable('#datatable', {
                      },
                      "sProcessing":"Procesando...",
             },        
-});
-  
-
-    //Editar        
-    $(document).on("click", ".btnEditar", function(){	
-        opcion = 2; //editar
-        fila = $(this).closest("tr");	        
-        id = fila.find('td:eq(0)').text(); //capturo el ID	
-                        
-           
-    });
-    
+});               
     //Borrar
     $(document).on("click", ".btnBorrar", function(){
       fila = $(this);

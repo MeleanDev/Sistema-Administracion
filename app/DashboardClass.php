@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Models\Factura;
 use App\Models\MesCantidad;
+use App\Models\ProductoFactura;
 
 class DashboardClass
 {
@@ -27,5 +29,15 @@ class DashboardClass
     public function obtenerMes($mes){
         $datos = MesCantidad::where('mes', $mes)->first();
         return $datos;
+    }
+
+    public function tabla5mejoresFactu($columna){
+        $products = Factura::orderByDesc($columna)->limit(5)->get();
+        return $products;
+    }
+
+    public function tabla5mejoresProduc($columna){
+        $products = ProductoFactura::orderByDesc($columna)->limit(5)->get();
+        return $products;
     }
 }

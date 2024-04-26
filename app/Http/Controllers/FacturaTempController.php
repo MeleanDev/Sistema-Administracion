@@ -82,44 +82,48 @@ class FacturaTempController extends Controller
     }
 
     public function crearF(){
-        try {
 
-           // Crear datos de la factura 
-            $datosFactura = $this->puntoventa->RegistroFacturaTemp();
-            $cantidadProduc = $this->puntoventa->ProductoTempSum();
-            $totalCompra = $this->puntoventa->ProductoTempSuma();
-            $this->puntoventa->CrearFacturaCompra($datosFactura, $cantidadProduc, $totalCompra);
+        $validarExistenciaProduct = $this->puntoventa->ProductoTempSum();
 
-            // Carga datos analisis
-            $mes = Carbon::now()->format('F');
-            $actual = $this->VentaAnalisis->Mes($mes);
-            $datosMes = $this->VentaAnalisis->obtenerMes($actual);
-
-                // sumamos las cantidades de compras 
-                $actualCantidad = $datosMes->cantidad;
-                $actualCompra = $datosMes->Compras;
-                
-                // Sumamos las compras  
-                $sumaCantidad = $actualCantidad + $totalCompra;
-                $sumaCompra = $actualCompra + 1;
-
-            // Cargamos el registro
-            $this->VentaAnalisis->SumarCompraMes($datosMes, $sumaCompra, $sumaCantidad);
-
-            // Registramos los productos en la BD
-            $productosGuardar = $this->puntoventa->ProductoTempTodos();
-            $this->puntoventa->guardarProductos( $productosGuardar ,$datosFactura->factura);
-
-            // Registramos la actividad
-            $this->registro->ActividadRegistro($datosFactura->factura, "Creo una", self::OBJETO);
-
-            // renicial tablas de facturatemp y productofactura
-            $this->puntoventa->reinicialTablas();
-
-            return redirect()->route('PuntoVentas')->with('correctamente', 'Factura Creada Exitosamente');
-        } catch (\Throwable $th) {
-            return redirect()->route('PuntoVentas')->with('incorrectamente', 'Factura No Creada');
+        if ($validarExistenciaProduct >= 1) {
+            try {
+                // Crear datos de la factura 
+                 $datosFactura = $this->puntoventa->RegistroFacturaTemp();
+                 $cantidadProduc = $this->puntoventa->ProductoTempSum();
+                 $totalCompra = $this->puntoventa->ProductoTempSuma();
+                 $this->puntoventa->CrearFacturaCompra($datosFactura, $cantidadProduc, $totalCompra);
+     
+                 // Carga datos analisis
+                 $mes = Carbon::now()->format('F');
+                 $actual = $this->VentaAnalisis->Mes($mes);
+                 $datosMes = $this->VentaAnalisis->obtenerMes($actual);
+     
+                     // sumamos las cantidades de compras 
+                     $actualCantidad = $datosMes->cantidad;
+                     $actualCompra = $datosMes->Compras;
+                     
+                     // Sumamos las compras  
+                     $sumaCantidad = $actualCantidad + $totalCompra;
+                     $sumaCompra = $actualCompra + 1;
+     
+                 // Cargamos el registro
+                 $this->VentaAnalisis->SumarCompraMes($datosMes, $sumaCompra, $sumaCantidad);
+     
+                 // Registramos los productos en la BD
+                 $productosGuardar = $this->puntoventa->ProductoTempTodos();
+                 $this->puntoventa->guardarProductos( $productosGuardar ,$datosFactura->factura);
+     
+                 // Registramos la actividad
+                 $this->registro->ActividadRegistro($datosFactura->factura, "Creo una", self::OBJETO);
+     
+                 // renicial tablas de facturatemp y productofactura
+                 $this->puntoventa->reinicialTablas();
+     
+                 return redirect()->route('PuntoVentas')->with('correctamente', 'Factura Creada Exitosamente');
+             } catch (\Throwable $th) {
+                 return redirect()->route('PuntoVentas')->with('incorrectamente', 'Factura No Creada');
+             }
         }
-        
+        return redirect()->route('PuntoVentas')->with('incorrectamente', 'No se puede Crear una factura sin sus productos');
     }
 }

@@ -20,7 +20,6 @@ Route::middleware('auth')->group(function () {
         // Punto de venta
         Route::get('PuntoDeVenta', [PuntoVentaController::class, 'index'])->name('PuntoVentas');
         Route::post('PuntoDeVenta/datos', [PuntoVentaController::class, 'CrearFactura'])->name('PuntoVentas.crear');
-        Route::get('PuntoDeVenta/CompraRealizada/editar', [PuntoVentaController::class, 'editarF'])->name('PuntoVentas.editar');
         Route::post('PuntoDeVenta/CompraRealizada/borrar', [PuntoVentaController::class, 'borrarF'])->name('PuntoVentas.borrar');
 
         // Factura

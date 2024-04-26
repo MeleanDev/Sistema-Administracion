@@ -63,7 +63,7 @@
                     </x-adminlte-card>
                 </div>
                 <div class="col-sm">
-                    <x-adminlte-card title="Cantidad de compras este Mes" theme="purple" icon="fas fa-lg fa-chart-bar" collapsible>
+                    <x-adminlte-card title="Facturas realizadas este Mes" theme="purple" icon="fas fa-lg fa-file" collapsible>
                         <dt class="text-center" style="font-size: 30px">Total: {{$datosMes->Compras}}</dt>
                     </x-adminlte-card>
                 </div>

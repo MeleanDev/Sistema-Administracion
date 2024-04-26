@@ -45,10 +45,16 @@ class VentasController extends Controller
         $actual = $this->DashboardClass->Mes($mes);   
         $datosMes = $this->DashboardClass->obtenerMes($actual);
 
+        $mejoresVentasFac = $this->DashboardClass->tabla5mejoresFactu("totalCompra");
+        $mejoresProductFac = $this->DashboardClass->tabla5mejoresProduc("cantidad");
+
         // Solo codifica a JSON si es necesario para un caso de uso específico
         $data['data'] = json_encode($data);
         $dataCuentas['dataCuentas'] = json_encode($dataCuentas);
-        return view('panelAdmin.ventas', $data, $dataCuentas)->with('datosMes', $datosMes);
+        return view('panelAdmin.ventas', $data, $dataCuentas)
+        ->with('datosMes', $datosMes)
+        ->with('mejoresVentasFac', $mejoresVentasFac)
+        ->with('mejoresProductFac', $mejoresProductFac);
 
     }
 }
