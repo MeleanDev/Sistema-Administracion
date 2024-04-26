@@ -330,11 +330,6 @@ return [
             'icon' => 'fas fa-chart-bar',
         ],
         [
-            'text' => 'Metodos de Pagos',
-            'route' => 'MetodosPagos',
-            'icon' => 'fas fa-landmark',
-        ],
-        [
             'text' => 'Clientes',
             'route' => 'Clientes',
             'icon' => 'fas fa-address-book',

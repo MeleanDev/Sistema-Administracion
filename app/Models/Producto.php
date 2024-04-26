@@ -14,6 +14,7 @@ class Producto extends Model
         'descripcion',
         'proveedor',
         'cantidad',
-        'precio'
+        'precio',
+        'vendidos'
     ];
 }

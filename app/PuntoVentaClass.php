@@ -118,6 +118,8 @@ class PuntoVentaClass
                 "cantidad" => $item->cantidad,
                 "precio" => $item->precio
             ]);
+
+            
         }
     }
     

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\ClientesClass;
 use App\Models\FacturaTemp;
+use App\ProductosCLass;
 use App\PuntoVentaClass;
 use App\RegistroActividadesClass;
 use App\VentaAnalisisClass;
@@ -15,17 +16,20 @@ class PuntoVentaController extends Controller
     private $clientes;
     private $registro;
     private $VentaAnalisis;
+    private $producto;
     const OBJETO = "Factura"; // Define la variable constante OBJETO
 
     public function __construct(PuntoVentaClass $puntoventa, 
                                 ClientesClass $clientes,
                                 RegistroActividadesClass $registro,
-                                VentaAnalisisClass $VentaAnalisis)
+                                VentaAnalisisClass $VentaAnalisis,
+                                ProductosCLass $producto)
     {
         $this->puntoventa = $puntoventa;
         $this->clientes = $clientes;
         $this->registro = $registro;
         $this->VentaAnalisis = $VentaAnalisis;
+        $this->producto = $producto;
     }
 
     public function index(Request $request){
@@ -61,6 +65,7 @@ class PuntoVentaController extends Controller
             // Obtenemos los productos de la factura 
             $productos = $this->puntoventa->ProductosFactura($data['id']); 
             $this->puntoventa->DevolverProductos($productos);
+            $this->producto->ventasResta($productos);
             $this->puntoventa->BorrarProductos($productos);
             
             // la factura

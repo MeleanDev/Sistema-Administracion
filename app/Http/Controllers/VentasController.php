@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\DashboardClass;
 use App\Models\MesCantidad;
-use App\Models\MetodosPago;
 use App\PuntoVentaClass;
 use Carbon\Carbon;
 
@@ -34,24 +33,16 @@ class VentasController extends Controller
             $data['data'][] = $item->cantidad; // Agrega la cantidad a la clave 'data'
         }
 
-        $BdCuentas = MetodosPago::all();
-        $dataCuentas = []; // Inicializa un arreglo vacío
-        foreach ($BdCuentas as $item) {
-            $dataCuentas['label'][] = $item->tipo." (".$item->banco.")";  // Agrega el mes a la clave 'label'
-            $dataCuentas['data'][] = $item->cantidad; // Agrega la cantidad a la clave 'data'
-        }
-
         $mes = Carbon::now()->format('F');
         $actual = $this->DashboardClass->Mes($mes);   
         $datosMes = $this->DashboardClass->obtenerMes($actual);
 
         $mejoresVentasFac = $this->DashboardClass->tabla5mejoresFactu("totalCompra");
-        $mejoresProductFac = $this->DashboardClass->tabla5mejoresProduc("cantidad");
+        $mejoresProductFac = $this->DashboardClass->tabla5mejoresProduc("vendidos");
 
         // Solo codifica a JSON si es necesario para un caso de uso específico
         $data['data'] = json_encode($data);
-        $dataCuentas['dataCuentas'] = json_encode($dataCuentas);
-        return view('panelAdmin.ventas', $data, $dataCuentas)
+        return view('panelAdmin.ventas', $data)
         ->with('datosMes', $datosMes)
         ->with('mejoresVentasFac', $mejoresVentasFac)
         ->with('mejoresProductFac', $mejoresProductFac);

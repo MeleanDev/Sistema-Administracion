@@ -53,6 +53,30 @@ class ProductosCLass
         ]);
     }
 
+    public function ventas($productos){
+        foreach ($productos as $item) {
+            $prod = $this->BuscarProductoNombre($item->producto);
+            $cantidadPro = $item->cantidad;
+            $cantidadActual = $prod->vendidos;
+            $sumaventas = $cantidadPro + $cantidadActual;
+            $prod->update([
+                "vendidos" => $sumaventas,
+            ]);
+        }
+    }
+
+    public function ventasResta($productos){
+        foreach ($productos as $item) {
+            $prod = $this->BuscarProductoNombre($item->producto);
+            $cantidadPro = $item->cantidad;
+            $cantidadActual = $prod->vendidos;
+            $sumaventas = $cantidadActual - $cantidadPro;
+            $prod->update([
+                "vendidos" => $sumaventas,
+            ]);
+        }
+    }
+
     public function EditarProducto($data){
         $id = $data['id'];
       

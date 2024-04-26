@@ -31,12 +31,6 @@ Route::middleware('auth')->group(function () {
         // Ventas
         Route::get('Ventas', [VentasController::class, 'index'])->name('Ventas');
 
-        // MetodosPagos
-        Route::get('MetodosPagos', [MetodosPagosController::class, 'index'])->name('MetodosPagos');
-        Route::put('MetodosPagos/editar/{id}', [MetodosPagosController::class, 'editar'])->name('MetodosPagos.editar');
-        Route::post('MetodosPagos/guardar', [MetodosPagosController::class, 'crear'])->name('MetodosPagos.guardar');
-        Route::get('MetodosPagos/eliminar/{id}', [MetodosPagosController::class, 'eliminar'])->name('MetodosPagos.eliminar');
-
         // Clientes
         Route::get('Clientes', [ClientesController::class, 'index'])->name('Clientes'); 
         Route::Post('Clientes/Crear', [ClientesController::class, 'crear'])->name('Clientes.crear');

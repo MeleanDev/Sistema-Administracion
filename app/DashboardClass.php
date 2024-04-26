@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Factura;
 use App\Models\MesCantidad;
+use App\Models\Producto;
 use App\Models\ProductoFactura;
 
 class DashboardClass
@@ -37,7 +38,7 @@ class DashboardClass
     }
 
     public function tabla5mejoresProduc($columna){
-        $products = ProductoFactura::orderByDesc($columna)->limit(5)->get();
+        $products = Producto::orderByDesc($columna)->limit(5)->get();
         return $products;
     }
 }

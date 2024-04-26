@@ -52,9 +52,9 @@ class FacturaTempController extends Controller
                 $preciot = $precio * $comprar;
                 $descontar = $disponible - $comprar;
 
-                $this->puntoventa->ProductoDescontar($producto, $descontar);
-
                 $this->puntoventa->ProductoTempCrear($producto->nombre, $comprar, $preciot, $precio);
+
+                $this->puntoventa->ProductoDescontar($producto, $descontar);
 
                 return redirect()->route('Factura.crear')->with('correctamente', 'Producto Agregado a la factura');
             }
@@ -111,6 +111,7 @@ class FacturaTempController extends Controller
      
                  // Registramos los productos en la BD
                  $productosGuardar = $this->puntoventa->ProductoTempTodos();
+                 $this->producto->ventas($productosGuardar);
                  $this->puntoventa->guardarProductos( $productosGuardar ,$datosFactura->factura);
      
                  // Registramos la actividad

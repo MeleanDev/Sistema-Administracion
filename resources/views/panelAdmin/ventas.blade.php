@@ -30,7 +30,7 @@
           </div>
           <div class="col-sm text-center">
             <x-adminlte-card title="Recaudacion de Ventas Este Mes" theme="success" icon="fas fa-lg fa-search-dollar">
-              <dt>Total : {{$datosMes->cantidad}}Bs.s</dt> 
+              <dt>Total : {{$datosMes->cantidad}} Bs.s</dt> 
             </x-adminlte-card>
           </div>
         </div>
@@ -60,17 +60,6 @@
           </div>
         </div>
       </div>
-      <div class="informacionsd">
-        <div class="row">
-            <div class="col-sm" style="width: 100%">
-              <x-adminlte-card body-class="bg-white" title="Recaudacion en distinto medios de pago 2024" theme="info" icon="fas fa-lg fa-chart-pie" collapsible >
-                <div>
-                  <canvas id="Cuentas"></canvas>
-                </div>
-              </x-adminlte-card>
-            </div>
-        </div>
-      </div>
       <div class="informacion tableClienteProducto">
         <div class="row">
           <div class="col-sm text-center">
@@ -85,8 +74,8 @@
                 <tbody>
                   @foreach ($mejoresProductFac as $item)
                   <tr>
-                    <td>{{$item->producto}}</td>
-                    <td>{{$item->cantidad}}</td>
+                    <td>{{$item->nombre}}</td>
+                    <td>{{$item->vendidos}}</td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -134,12 +123,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       let cData = JSON.parse('<?= $data; ?>');
-      let cDataCuenta = JSON.parse('<?= $dataCuentas; ?>');
       const ctx = document.getElementById('Meses');
-      const ctxx = document.getElementById('Cuentas');
-
       createChart(ctx, cData.data, 'bar', cData.label);
-      createChart(ctxx, cDataCuenta.data, 'bar', cDataCuenta.label);
 
       function createChart(ctx, data, chartType, labels) {
         const colorArray = [
