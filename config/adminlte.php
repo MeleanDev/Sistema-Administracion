@@ -64,11 +64,11 @@ return [
     */
 
     'logo' => '<b>Melean</b>Dev',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'vendor/adminlte/dist/img/logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Admin Logo',
+    'logo_img_alt' => 'MeleanDevLogo',
 
     /*
     |--------------------------------------------------------------------------
@@ -110,14 +110,14 @@ return [
     */
 
     'preloader' => [
-        'enabled' => false,
+        'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'alt' => 'AdminLTE Preloader Image',
+            'path' => 'vendor/adminlte/dist/img/logo.png',
+            'alt' => 'MeleanDevLogo',
             'effect' => 'animation__shake',
-            'width' => 60,
-            'height' => 60,
+            'width' => 400,
+            'height' => 400,
         ],
     ],
 

@@ -82,6 +82,7 @@ class PuntoVentaClass
         $factura = Factura::where('factura', $id)->first();
         return $factura;
     }
+    
 
     public function FacturaMes($id){
         $factura = Factura::where('factura', $id)->first();
