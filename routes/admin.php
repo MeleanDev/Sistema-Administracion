@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdministradoresController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\FacturaTempController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ProveedoresController;
@@ -15,6 +16,10 @@ Route::middleware('auth')->group(function () {
     Route::prefix('Sistema')->group(function () {
 
         Route::get('/PanelPrincipal', [DashboardController::class, 'index'])->name('dashboard');
+
+        // Empresa
+        Route::get('Empresa', [EmpresaController::class, 'index'])->name('Empresa');
+        Route::post('Empresa/Editar', [EmpresaController::class, 'editar'])->name('Empresa.editar');
         
         // Punto de venta
         Route::get('PuntoDeVenta', [PuntoVentaController::class, 'index'])->name('PuntoVentas');

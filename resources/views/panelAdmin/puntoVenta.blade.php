@@ -115,7 +115,7 @@
           <div class="modal-body">
               <h2 class="font-weight-bold" style="margin: 0auto; text-align:center">Elije una Factura para Imprimir</h2>
               <br>
-              <form method="post" action="{{route('Factura.imprimir')}}">
+              <form method="post" action="{{route('Factura.imprimir')}}" target="_blank">
                   @csrf
                   <div class="form-group mb-3">
                       <label for="imprime" class="">Selecciona la Factura</label>

@@ -27,6 +27,7 @@
       </div>
       <div class="col-md-6 text-right">
         <p><strong>Factura N°:</strong> {{$idfactura}}</p>
+        <p><strong>Fecha de emision:</strong> {{$fechacreacion}}</p>
       </div>
     </div>
   </div>
@@ -44,10 +45,10 @@
   <div class="container">
     <h3>Datos de la empresa</h3>
     <address>
-      [Nombre de la empresa]<br>
-      [Dirección de la empresa]<br>
-      Teléfono: [Número de teléfono de la empresa]<br>
-      Correo electrónico: [Correo electrónico de la empresa]
+      {{$nombre}}<br>
+      Direccion: {{$direccion}}<br>
+      Teléfono: {{$telefono}}<br>
+      Correo electrónico: {{$correo}}
     </address>
   </div>
 

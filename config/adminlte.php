@@ -320,6 +320,11 @@ return [
             'icon' => 'fas fa-home',
         ],
         [
+            'text' => 'Empresa',
+            'route' => 'Empresa',
+            'icon' => 'fas fa-id-badge',
+        ],
+        [
             'text' => 'Punto de venta',
             'route' => 'PuntoVentas',
             'icon' => 'fas fa-desktop',

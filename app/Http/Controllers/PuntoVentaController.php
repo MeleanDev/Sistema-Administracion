@@ -101,32 +101,47 @@ class PuntoVentaController extends Controller
     }
 
     public function pdf(Request $datos){
+        $empresa = $this->puntoventa->Empresa();
 
-        $idfactura = $datos->imprime;
+        if ($empresa) {
+            $idfactura = $datos->imprime;
 
-        $datoFactura = $this->puntoventa->Factura($idfactura);
-        $cantidadProductos = $datoFactura->cantidadProducto;
-        $cantidadVenta = $datoFactura->totalCompra;
-
-        $cedulaCliente = $datoFactura->cedula;
-        $datoCliente = $this->clientes->BuscarClienteCedula($cedulaCliente);
-
-        $clienteNo = $datoCliente->nombre." ".$datoCliente->apellido;
-        $ClienteCe = $datoCliente->cedula;
-        $ClienteTe = $datoCliente->telefono;
-
-        $productoFactura = $this->puntoventa->ProductosFactura($idfactura);
-
-        $pdf = Pdf::loadView('panelAdmin.pdfFactura', [
-            'ClienteTe' => $ClienteTe,
-            'ClienteCe' => $ClienteCe,
-            'clienteNo' => $clienteNo,
-            'cantidadVenta' => $cantidadVenta,
-            'cantidadProductos' => $cantidadProductos,
-            'productoFactura' => $productoFactura,
-            'idfactura' => $idfactura,
-        ]);
-
-        return $pdf->download('FacturaCliente.pdf');
+            $datoFactura = $this->puntoventa->Factura($idfactura);
+            $cantidadProductos = $datoFactura->cantidadProducto;
+            $cantidadVenta = $datoFactura->totalCompra;
+            $fechacreacion = $datoFactura->created_at;
+    
+            $cedulaCliente = $datoFactura->cedula;
+            $datoCliente = $this->clientes->BuscarClienteCedula($cedulaCliente);
+    
+            $clienteNo = $datoCliente->nombre." ".$datoCliente->apellido;
+            $ClienteCe = $datoCliente->cedula;
+            $ClienteTe = $datoCliente->telefono;
+    
+            $productoFactura = $this->puntoventa->ProductosFactura($idfactura);
+    
+            $nombre =  $empresa->nombre;
+            $direccion = $empresa->direccion;
+            $telefono = $empresa->telefono;
+            $correo = $empresa->correo;
+    
+            $pdf = Pdf::loadView('panelAdmin.pdfFactura', [
+                'nombre' => $nombre,
+                'direccion' => $direccion,
+                'telefono' => $telefono,
+                'correo' => $correo,
+                'fechacreacion' => $fechacreacion,
+                'ClienteTe' => $ClienteTe,
+                'ClienteCe' => $ClienteCe,
+                'clienteNo' => $clienteNo,
+                'cantidadVenta' => $cantidadVenta,
+                'cantidadProductos' => $cantidadProductos,
+                'productoFactura' => $productoFactura,
+                'idfactura' => $idfactura,
+            ]);
+    
+            return $pdf->stream();
+        }
+        return redirect()->route('PuntoVentas')->with('incorrectamente', 'Rellene los datos de la empresa');
     }
 }

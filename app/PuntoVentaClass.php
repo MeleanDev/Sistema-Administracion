@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Empresa;
 use App\Models\Factura;
 use App\Models\FacturaTemp;
 use App\Models\ProductoFactura;
@@ -55,6 +56,11 @@ class PuntoVentaClass
     public function ProductosFactura($factura){
         $datos = ProductoFactura::where('factura', $factura)->get();
         return $datos;
+    }
+
+    public function Empresa(){
+        $empresa = Empresa::first();
+        return $empresa;
     }
 
     public function DevolverProductos($datos){
