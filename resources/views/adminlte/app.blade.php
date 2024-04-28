@@ -38,7 +38,7 @@
     </div>
 
     <strong>
-        <a class="text-light" href="{{ config('app.company_url', '#') }}">
+        <a class="text-light" href="{{ config('app.company_url', '#') }}" target="_blank">
             {{ config('app.company_name', 'Desarrollado Por MeleanDev') }}
         </a>
     </strong>

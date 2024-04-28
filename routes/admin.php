@@ -4,7 +4,6 @@ use App\Http\Controllers\AdministradoresController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacturaTempController;
-use App\Http\Controllers\MetodosPagosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\PuntoVentaController;
@@ -27,7 +26,8 @@ Route::middleware('auth')->group(function () {
         Route::post('Factura/guardarProducto', [FacturaTempController::class, 'guardarPro'])->name('Factura.guardarPro');
         Route::get('Factura/eliminarProducto/{id}', [FacturaTempController::class, 'eliminar'])->name('Factura.eliminar');
         Route::get('Factura/CompraRealizada', [FacturaTempController::class, 'crearF'])->name('Compra.crear');
-        
+        Route::post('Factura/Imprimir', [PuntoVentaController::class, 'pdf'])->name('Factura.imprimir');
+       
         // Ventas
         Route::get('Ventas', [VentasController::class, 'index'])->name('Ventas');
 

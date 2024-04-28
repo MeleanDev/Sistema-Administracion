@@ -23,6 +23,9 @@
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#crear">
             Crear Nueva Factura
         </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imprimir">
+          Imprimir Factura
+      </button>
         @if ($existeRegistro)
           <a href="{{route('Factura.crear')}}" class="btn btn-info">
             Volver a La Ultima Factura
@@ -99,6 +102,40 @@
         </div>
         </div>
     </div>
+    <!-- Modal Imprimir-->
+    <div class="modal fade" id="imprimir" tabindex="-1" role="dialog" aria-labelledby="imprimir" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header bg-info">
+          <h5 class="modal-title" id="exampleModalLabel">Imprimir Factura</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+              <h2 class="font-weight-bold" style="margin: 0auto; text-align:center">Elije una Factura para Imprimir</h2>
+              <br>
+              <form method="post" action="{{route('Factura.imprimir')}}">
+                  @csrf
+                  <div class="form-group mb-3">
+                      <label for="imprime" class="">Selecciona la Factura</label>
+                      <select class="form-control" id="imprime" name="imprime" style="width: 100%" required>
+                          <option></option>
+                          @foreach ($facturas as $item)
+                              <option value="{{$item->factura}}">{{$item->nombre}} V{{$item->cedula}} - Factura: {{$item->factura}}</option>
+                          @endforeach
+                      </select>
+                      <small id="clientes" class="form-text text-muted">Formato: Cliente Cedula - Factura.</small> 
+                  </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Imprimir Factura</button>
+          </div>
+      </form>
+      </div>
+      </div>
+  </div>
 </div>
 @stop
 
@@ -123,6 +160,15 @@ $(document).ready(function() {
       });
 });
 
+$(document).ready(function() {
+      $('#imprime').select2({
+        dropdownParent: $('#imprimir'),
+        width: 'resolve',
+        theme: "classic",
+        placeholder: "Selecciona una Factura",
+      });
+});
+
 var id, fila;
 var token = $('meta[name="csrf-token"]').attr('content');
 
@@ -139,7 +185,7 @@ var table = new DataTable('#datatable', {
                 {data: 'cantidadProducto', name: 'cantidadProducto', className: 'text-center'},         
                 {data: 'totalCompra', name: 'totalCompra', className: 'text-center'}, 
                 {"defaultContent": "<div class=\"dropdown text-center\"><button class=\"btn btn-primary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"> Acción </button><div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\"><button class='dropdown-item bg-danger text-light btnBorrar'><i class='fas fa-lg fa-trash'> Eliminar</i></button></div></div>"}
-        ],
+        ],order: [[0, 'desc']],
             columnDefs: [{orderable: false, targets: 6}],
             language: {
                     "zeroRecords": "No se encontraron resultados",
@@ -194,6 +240,9 @@ var table = new DataTable('#datatable', {
                   showConfirmButton: false,
                   timerProgressBar: true,
                 });
+
+                const PuntoVentas = '{{ route('PuntoVentas') }}';
+                window.location.href = PuntoVentas;
               } else {
                 // Mostrar mensaje de error
                 Swal.fire({

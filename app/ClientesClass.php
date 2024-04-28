@@ -24,6 +24,11 @@ class ClientesClass
         return $data;
     }
 
+    public function BuscarClienteCedula($data){
+        $dat = Cliente::where('cedula', $data)->first();
+        return $dat;
+    }
+
     public function CrearCliente($data){
 
         Cliente::create([

@@ -73,10 +73,12 @@
                 </thead>
                 <tbody>
                   @foreach ($mejoresProductFac as $item)
-                  <tr>
-                    <td>{{$item->nombre}}</td>
-                    <td>{{$item->vendidos}}</td>
-                  </tr>
+                    @if ($item->vendidos >= 1)
+                      <tr>
+                        <td>{{$item->nombre}}</td>
+                        <td>{{$item->vendidos}}</td>
+                      </tr>
+                    @endif
                   @endforeach
                 </tbody>
               </table>

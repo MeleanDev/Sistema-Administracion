@@ -8,6 +8,7 @@ use App\PuntoVentaClass;
 use App\RegistroActividadesClass;
 use App\VentaAnalisisClass;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PuntoVentaController extends Controller
 {
@@ -38,7 +39,8 @@ class PuntoVentaController extends Controller
         } 
         $existeRegistro = FacturaTemp::existeRegistro('id', 1);
         $clientes = $this->clientes->DatosClientes();
-        return view('panelAdmin.puntoVenta', compact('clientes', 'existeRegistro'));
+        $facturas = $this->puntoventa->DatosFacturas();
+        return view('panelAdmin.puntoVenta', compact('clientes', 'existeRegistro', 'facturas'));
     }
 
     public function CrearFactura(Request $data){
@@ -96,5 +98,35 @@ class PuntoVentaController extends Controller
             $respuesta = response()->json(['error' => true]); 
             }
             return $respuesta;
+    }
+
+    public function pdf(Request $datos){
+
+        $idfactura = $datos->imprime;
+
+        $datoFactura = $this->puntoventa->Factura($idfactura);
+        $cantidadProductos = $datoFactura->cantidadProducto;
+        $cantidadVenta = $datoFactura->totalCompra;
+
+        $cedulaCliente = $datoFactura->cedula;
+        $datoCliente = $this->clientes->BuscarClienteCedula($cedulaCliente);
+
+        $clienteNo = $datoCliente->nombre." ".$datoCliente->apellido;
+        $ClienteCe = $datoCliente->cedula;
+        $ClienteTe = $datoCliente->telefono;
+
+        $productoFactura = $this->puntoventa->ProductosFactura($idfactura);
+
+        $pdf = Pdf::loadView('panelAdmin.pdfFactura', [
+            'ClienteTe' => $ClienteTe,
+            'ClienteCe' => $ClienteCe,
+            'clienteNo' => $clienteNo,
+            'cantidadVenta' => $cantidadVenta,
+            'cantidadProductos' => $cantidadProductos,
+            'productoFactura' => $productoFactura,
+            'idfactura' => $idfactura,
+        ]);
+
+        return $pdf->download('FacturaCliente.pdf');
     }
 }
