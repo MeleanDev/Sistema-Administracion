@@ -21,7 +21,7 @@
                                     <br>Al sistema de administracion de tu comercio. <br><br>Sistema desarrollado por MeleanDev.
                                 </p>
                         
-                                <a href="https://github.com/MeleanDev" target="_blank" class="btn btn-sm btn-primary">Contactar con el Desarrollador</a>
+                                <a href="https://instagram.com/MeleanDev" target="_blank" class="btn btn-sm btn-primary">Contactar con el Desarrollador</a>
                             </div>
                         </div>
                         <div class="col-sm-5 text-center text-sm-left">
