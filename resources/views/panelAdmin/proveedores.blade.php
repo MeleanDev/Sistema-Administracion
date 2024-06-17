@@ -67,35 +67,35 @@
           <div class="row mb-2">
             <div class="col"> 
                 <label for="identificacion">Identificacion</label> 
-                <input type="text" class="form-control" id="identificacion" placeholder="identificacion"> 
+                <input type="text" class="form-control" id="identificacion" required placeholder="identificacion"> 
                 <small id="identificacion" class="form-text text-muted">Cedula del Proveedor.</small>
             </div> 
             <div class="col"> 
                 <label for="nombre">Nombre</label> 
-                <input type="text" class="form-control" id="nombre" placeholder="Nombre"> 
+                <input type="text" class="form-control" id="nombre" required placeholder="Nombre"> 
                 <small id="nombre" class="form-text text-muted">Nombre del Proveedor.</small>
             </div>
           </div>
           <div class="row mb-2"> 
             <div class="col"> 
                 <label for="telefono">Telefono</label> 
-                <input type="text" class="form-control" id="telefono" placeholder="Telefono"> 
+                <input type="text" class="form-control" id="telefono" required placeholder="Telefono"> 
                 <small id="telefono" class="form-text text-muted">Telefono del Proveedor.</small>
             </div> 
             <div class="col"> 
               <label for="correo">Correo</label> 
-              <input type="text" class="form-control" id="correo" placeholder="Correo"> 
+              <input type="text" class="form-control" id="correo" required placeholder="Correo"> 
               <small id="correo" class="form-text text-muted">Correo del Proveedor.</small>
             </div>
           </div> 
           <div class="form-group"> 
             <label for="direccion">Direccion</label> 
-            <input type="text" class="form-control" id="direccion" placeholder="Direccion"> 
+            <input type="text" class="form-control" id="direccion" required placeholder="Direccion"> 
             <small id="direccion" class="form-text text-muted">Direccion del Proveedor.</small>
         </div> 
         <div class="form-group"> 
           <label for="descripcion">Descripcion</label> 
-          <input type="text" class="form-control color-black" id="descripcion" placeholder="Descripcion">
+          <input type="text" class="form-control color-black" required id="descripcion" placeholder="Descripcion">
           <small id="descripcion" class="form-text text-muted">Descripcion Corta del Proveedor.</small> 
       </div> 
       </div>
@@ -184,6 +184,7 @@
           descripcion: descripcion,
         },
         success: function(data) {
+        if (data.success) {
           table.ajax.reload(null, false);
           if (opcion === 1) {
             Swal.fire({
@@ -201,6 +202,13 @@
               timerProgressBar: true
               }); 
           }
+        }else{
+          Swal.fire({
+            title: "Proveedores No Agregado",
+            text: "El registro no fue agregado al sistema",
+            icon: "error"
+          });
+        }
         },
         error: function(xhr, status, error) {
           Swal.fire({

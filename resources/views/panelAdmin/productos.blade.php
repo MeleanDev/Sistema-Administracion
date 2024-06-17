@@ -66,12 +66,12 @@
                     @csrf
                 <div class="form-group text-center"> 
                     <label for="nombre">Nombre</label> 
-                    <input type="text" class="form-control" id="nombre" placeholder="Nombre"> 
+                    <input type="text" class="form-control" id="nombre" required placeholder="Nombre"> 
                     <small id="nombre" class="form-text text-muted">Nombre del Producto.</small> 
                 </div> 
                 <div class="form-group text-center"> 
                     <label for="descripcion">descripcion</label> 
-                    <input type="text" class="form-control" id="descripcion" placeholder="Descripcion">
+                    <input type="text" class="form-control" id="descripcion" required placeholder="Descripcion">
                     <small id="descripcion" class="form-text text-muted">Descripcion corta del Producto.</small>  
                 </div> 
                 <div class="form-group text-center">
@@ -87,12 +87,12 @@
               <div class="form-row justify-content-around">
                 <div class="form-group col-md-5"> 
                     <label for="cantidad">cantidad disponible</label> 
-                    <input type="number" class="form-control" id="cantidad" placeholder="cantidad" min="0">
+                    <input type="number" class="form-control" id="cantidad" required placeholder="cantidad" min="0">
                     <small id="cantidad" class="form-text text-muted">Cantidad disponible.</small> 
                 </div> 
                 <div class="form-group col-md-5"> 
                     <label for="precio">precio del Producto</label> 
-                    <input type="number" class="form-control" id="precio" placeholder="precio" min="0"> 
+                    <input type="number" class="form-control" id="precio" required placeholder="precio" min="0"> 
                     <small id="precio" class="form-text text-muted">Precio del Producto.</small> 
                 </div> 
               </div>
@@ -188,7 +188,8 @@
             precio: precio,
           },
           success: function(data) {
-            table.ajax.reload(null, false);
+            if (data.success) {
+              table.ajax.reload(null, false);
             if (opcion === 1) {
               Swal.fire({
                 title: "Producto Agregado",
@@ -204,6 +205,13 @@
                 showConfirmButton: false,
                 timerProgressBar: true
                 }); 
+            }
+            } else {
+              Swal.fire({
+              title: "Producto No Agregado",
+              text: "El registro no fue agregado al sistema",
+              icon: "error"
+            });
             }
           },
           error: function(xhr, status, error) {

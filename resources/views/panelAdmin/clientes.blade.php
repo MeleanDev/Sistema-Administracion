@@ -62,19 +62,19 @@
               @csrf
           <div class="form-group"> 
               <label for="nombre">Nombre</label> 
-              <input type="text" class="form-control" id="nombre" placeholder="Nombre"> 
+              <input type="text" class="form-control" required id="nombre" placeholder="Nombre"> 
           </div> 
           <div class="form-group"> 
               <label for="apellido">Apellido</label> 
-              <input type="text" class="form-control" id="apellido" placeholder="Apellido"> 
+              <input type="text" class="form-control" required id="apellido" placeholder="Apellido"> 
           </div> 
           <div class="form-group"> 
               <label for="cedula">Cedula</label> 
-              <input type="text" class="form-control" id="cedula" placeholder="Cedula"> 
+              <input type="text" class="form-control" required id="cedula" placeholder="Cedula"> 
           </div> 
           <div class="form-group"> 
               <label for="telefono">Telefono</label> 
-              <input type="text" class="form-control" id="telefono" placeholder="Telefono"> 
+              <input type="text" class="form-control" required id="telefono" placeholder="Telefono"> 
           </div> 
       </div>
       <div class="modal-footer">
@@ -154,7 +154,8 @@
           telefono: telefono,
         },
         success: function(data) {
-          table.ajax.reload(null, false);
+          if (data.success) {
+            table.ajax.reload(null, false);
           if (opcion === 1) {
             Swal.fire({
               title: "Cliente Agregado",
@@ -170,6 +171,13 @@
               showConfirmButton: false,
               timerProgressBar: true
               }); 
+          }
+          } else {
+            Swal.fire({
+            title: "Cliente No Agregado",
+            text: "El registro no fue agregado al sistema",
+            icon: "error"
+          });
           }
         },
         error: function(xhr, status, error) {
