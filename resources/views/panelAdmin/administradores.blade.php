@@ -40,18 +40,18 @@
                       <div class="form-row">
                           <div class="form-group col-md-6">
                               <label for="name">Nombre Usuario</label>
-                              <input type="text" class="form-control" placeholder="Usuario" name="name">
+                              <input type="text" class="form-control" required placeholder="Usuario" name="name">
                               <small id="name" class="form-text text-muted"> Nombre de Usuario.</small> 
                           </div>
                           <div class="form-group col-md-6">
                             <label for="email">Correo Electronico</label>
-                            <input type="email" class="form-control" placeholder="Correo" name="email">
+                            <input type="email" class="form-control" required placeholder="Correo" name="email">
                             <small id="email" class="form-text text-muted">Correo Electronico.</small> 
                           </div>
                       </div>
                       <div class="form-group">
                             <label for="password">Contraseña</label>
-                            <input type="password" class="form-control" placeholder="Contraseña" name="password">
+                            <input type="password" class="form-control" required placeholder="Contraseña" name="password">
                             <small id="passwordHelpInline" class="text-muted">
                              La Contraseña debe tener entre 8 y 20 caracteres.
                             </small>    
