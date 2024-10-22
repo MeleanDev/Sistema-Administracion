@@ -45,6 +45,4 @@ npm install
 ```
 ## Licencia
 
-GPL
-
-**No usar en temas empresarial, solamente para entorno de practica (desarrollo) si desea usar el codigo para tema empresarial o comercial cantacte al desarrollador Principal**
+BSD 3-Clause License
