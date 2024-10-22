@@ -20,7 +20,7 @@ class DashboardClass
             'July' => 'Julio',
             'August' => 'Agosto',
             'September' => 'Septiembre',
-            'October' => 'Obtubre',
+            'October' => 'Octubre',
             'November' => 'Noviembre',
             'December' => 'Diciembre'
         };   
